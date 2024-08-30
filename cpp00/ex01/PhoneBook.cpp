@@ -15,7 +15,7 @@ void PhoneBook::AddContact(Contact c)
 
 void PhoneBook::SearchForContact(int ind)
 {
-	if (ind >= 0 && ind < 8 && index > 0)
+	if (ind < index)
 	{
 		Contact c = contacts[ind];
 		std::cout << std::setw(10) << std::right << ind << "|";
@@ -40,7 +40,7 @@ void PhoneBook::SearchForContact(int ind)
 			std::cout << std::setw(10) << std::right << c.phoneNumber.substr(0, 9) + "." << "|";
 			
 		if (c.darkestSecret.length() < 10)
-			std::cout << std::setw(10) << std::right << c.darkestSecret << "|";
+			std::cout << std::setw(10) << std::right << c.darkestSecret << "|" << std::endl;
 		else
 			std::cout << std::setw(10) << std::right << c.darkestSecret.substr(0, 9) + "." << "|" << std::endl;
 	}

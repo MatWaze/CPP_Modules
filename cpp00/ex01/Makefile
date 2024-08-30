@@ -1,4 +1,4 @@
-name = megaphone
+name = phonebook
 cc = c++
 flags = -Wall -Wextra -Werror -std=c++98 -pedantic
 src = main.cpp PhoneBook.cpp
