@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <ios>
 #include <iostream>
-	
+			
 void PhoneBook::AddContact(Contact c)
 {
 	if (index < 8)
