@@ -6,8 +6,6 @@
 class Contact
 {
 	public:
-		// Contact(void);
-		// ~Contact(void);
 		std::string firstName;
 		std::string lastName;
 		std::string nickname;
