@@ -1,7 +1,7 @@
 name = zombie
 c++ = c++
 flags = -Wall -Wextra -Werror -std=c++98 -pedantic
-src = main.cpp Zombie.cpp newZombie.cpp, randomChump.cpp
+src = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 obj = $(src:.c=.o)
 
 all : $(name)
