@@ -1,3 +1,6 @@
+#ifndef HUMANA_HPP
+# define HUMANA_HPP
+
 #include "Weapon.hpp"
 
 // References must be initialized when they are created and cannot be changed to refer to another object later.
@@ -12,3 +15,5 @@ class HumanA
 		HumanA(std::string n, Weapon& w);
 		void attack();
 };
+
+#endif
