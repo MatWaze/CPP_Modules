@@ -1,6 +1,6 @@
 name = harlFilter
 c++ = c++
-flags = -Wall -Wextra -Werror
+flags = -Wall -Wextra -Werror -std=c++98 -pedantic
 src = main.cpp Harl.cpp
 obj = $(src:.o=.c)
 

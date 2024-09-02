@@ -1,6 +1,6 @@
 name = sed
 c++ = c++
-flags = -Wall -Wextra -Werror
+flags = -Wall -Wextra -Werror -std=c++98 -pedantic
 src = main.cpp File.cpp
 obj = $(src:.c=.o)
 
