@@ -16,15 +16,13 @@ TEST_CASE("Testing Harl class methods")
     std::ostringstream oss;
     std::cout.rdbuf(oss.rdbuf());
     
-    // Call the function that prints
     harl.complain("info");
 
     // Get the captured output
     std::string output = oss.str();
-    
-    // Assert the expected output
-    CHECK(output == "I cannot believe adding extra bacon costs more money. You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!\n");
-    
+
+    CHECK(output == "[INFO]\n");
+
     // Restore the original stdout
     std::cout.rdbuf(oldBuf);
 }

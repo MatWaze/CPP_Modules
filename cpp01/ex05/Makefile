@@ -1,4 +1,4 @@
-name = sed
+name = harl
 c++ = c++
 flags = -Wall -Wextra -Werror
 src = main.cpp Harl.cpp

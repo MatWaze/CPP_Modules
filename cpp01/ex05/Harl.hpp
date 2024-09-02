@@ -10,9 +10,11 @@ class Harl
 		void info(void);
 		void warning(void);
 		void error(void);
-	
+		void (Harl::*_memberPtrs[4]) (void);
 	public:
 		void complain(std::string level);
+		Harl();
+
 };
 
 #endif

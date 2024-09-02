@@ -2,34 +2,42 @@
 
 void Harl::complain(std::string level)
 {
-    if (level == "debug")
-        this->debug();
-    else if (level == "info")
-        this->info();
-    else if (level == "warning")
-        this->warning();
-    else if (level == "error")
-        this->error();
-    else
-        std::cout << "Unknown level" << std::endl;
+    std::string array[4] = {"debug", "info", "warning", "error"};
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (array[i] == level)
+        {
+            (this->*_memberPtrs[i])();
+            break;
+        }
+    }
 }
 
 void Harl::debug(void)
 {
-    std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!" << std::endl;
+    std::cout << "[DEBUG]" << std::endl;
 }
 
 void Harl::info(void)
 {
-    std::cout << "I cannot believe adding extra bacon costs more money. You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!" << std::endl;
+    std::cout << "[INFO]" << std::endl;
 }
 
 void Harl::warning(void)
 {
-    std::cout << "I think I deserve to have some extra bacon for free. I've been coming for years whereas you started working here since last month." << std::endl;
+    std::cout << "[WARNING]" << std::endl;
 }
 
 void Harl::error(void)
 {
-    std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;      
+    std::cout << "[ERROR]" << std::endl;      
+}
+
+Harl::Harl()
+{
+    this->_memberPtrs[0] = &Harl::debug;
+    this->_memberPtrs[1] = &Harl::info;
+    this->_memberPtrs[2] = &Harl::warning;
+    this->_memberPtrs[3] = &Harl::error;
 }
