@@ -12,7 +12,7 @@ sanitize : all
 $(name) : $(obj) Makefile
 	$(c++) $(flags) $(obj) -o $(name)
 
-%.o : %.c
+%.o : %.cpp
 	$(c++) $(flags) -c $< -o $@
 	
 clean : 

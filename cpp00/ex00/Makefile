@@ -2,7 +2,7 @@ name = megaphone
 cc = c++
 flags = -Wall -Wextra -Werror -std=c++98 -pedantic
 src = megaphone.cpp
-obj = $(src:.c=.o)
+obj = $(src:.cpp=.o)
 
 all : $(name)
 
@@ -12,7 +12,7 @@ sanitize : all
 $(name) : $(obj) Makefile
 	$(cc) $(flags) $(obj) -o $(name)
 
-%.o : %.c
+%.o : %.cpp
 	$(cc) $(flags) -c $< -o $@
 	
 clean : 

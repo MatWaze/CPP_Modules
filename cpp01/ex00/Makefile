@@ -2,7 +2,7 @@ name = zombie
 c++ = c++
 flags = -Wall -Wextra -Werror -std=c++98 -pedantic
 src = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
-obj = $(src:.c=.o)
+obj = $(src:.cpp=.o)
 
 all : $(name)
 
@@ -12,7 +12,7 @@ sanitize : all
 $(name) : $(obj) Makefile
 	$(c++) $(flags) $(obj) -o $(name)
 
-%.o : %.c
+%.o : %.cpp
 	$(c++) $(flags) -c $< -o $@
 	
 clean : 
