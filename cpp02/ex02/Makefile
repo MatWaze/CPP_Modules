@@ -6,13 +6,13 @@ obj = $(src:.cpp=.o)
 
 all : $(name)
 
-sanitize : flags += -g -fsanitize=thread
+sanitize : flags += -g -fsanitize=address
 sanitize : all
 
 $(name) : $(obj) Makefile
 	$(c++) $(flags) $(obj) -o $(name)
 
-%.o : %.cpppp
+%.o : %.cpp
 	$(c++) $(flags) -c $< -o $@
 
 clean :
