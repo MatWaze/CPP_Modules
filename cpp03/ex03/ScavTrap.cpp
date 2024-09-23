@@ -4,10 +4,8 @@
 
 ScavTrap::ScavTrap()
 {
-    std::cout << "ScavTrap default constructor called" << std::endl;
-    this->setHP(100);
-    this->setEP(50);
-    this->setAD(20);
+    std::cout << "Default ScavTrap constructor called" << std::endl;
+    ClapTrap::setEP(50);
 }
 
 ScavTrap::ScavTrap(ScavTrap& sT) : ClapTrap(sT)
@@ -25,9 +23,9 @@ ScavTrap::ScavTrap(const std::string n) : ClapTrap(n)
 {
     std::cout << "ScavTrap " << n << " created"
     << std::endl;
-    this->setHP(100);
-    this->setEP(50);
-    this->setAD(20);
+    ClapTrap::setHP(100);
+    ClapTrap::setEP(50);
+    ClapTrap::setAD(20);
 }
 
 ScavTrap::~ScavTrap()
@@ -44,7 +42,7 @@ void    ScavTrap::attack(const std::string n)
 
     if (hP <= 0)
     {
-        std::cout << "ScavTrap " << getName()
+        std::cout << "ScavTrap " << ClapTrap::getName()
         << " is dead. Can't do anything"
         << std::endl;
     }
@@ -52,8 +50,8 @@ void    ScavTrap::attack(const std::string n)
     {
         eP--;
         setEP(eP);
-        std::cout << "ScavTrap " << getName() << " attacks " << n
-        << " causing " << getAD() << " points of damage!"
+        std::cout << "ScavTrap " << ClapTrap::getName() << " attacks " << n
+        << " causing " << this->getAD() << " points of damage!"
         << std::endl;
     }
     else
@@ -65,4 +63,40 @@ void    ScavTrap::attack(const std::string n)
 void    ScavTrap::guardGate()
 {
     std::cout << "ScavTrap is now in Gatekeeper mode" << std::endl;
+}
+
+void    ScavTrap::setAD(int aD)
+{
+    ClapTrap::setAD(aD);
+}
+
+void    ScavTrap::setHP(int hP)
+{
+    ClapTrap::setHP(hP);
+}
+
+void    ScavTrap::setEP(int eP)
+{
+    ClapTrap::setEP(eP);
+    std::cout << "scav ep: " << eP << std::endl;
+}
+
+int    ScavTrap::getAD()
+{
+    return ClapTrap::getAD();
+}
+
+int    ScavTrap::getHP()
+{
+    return ClapTrap::getHP();
+}
+
+int    ScavTrap::getEP()
+{
+    return ClapTrap::getEP();
+}
+
+const std::string   ScavTrap::getName()
+{
+    return ClapTrap::getName();
 }
