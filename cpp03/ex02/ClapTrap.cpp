@@ -26,6 +26,7 @@ ClapTrap&   ClapTrap::operator=(ClapTrap& cT)
         this->_attackDamage = cT._attackDamage;
         this->_energyPoints = cT._energyPoints;
         this->_hitPoints = cT._hitPoints;
+        this->_name = cT._name;
     }
     return *this;
 }

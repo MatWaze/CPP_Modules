@@ -2,7 +2,7 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-FragTrap::FragTrap()
+FragTrap::FragTrap() : ClapTrap()
 {
     std::cout << "FragTrap default constructor called" << std::endl;
     this->setHP(100);
@@ -39,5 +39,5 @@ FragTrap::FragTrap(FragTrap& fT) : ClapTrap(fT)
 
 void    FragTrap::highFivesGuys(void)
 {
-    
+    std::cout << "Give high five!" << std::endl;
 }

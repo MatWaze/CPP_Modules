@@ -24,7 +24,7 @@ class ClapTrap
         void setAD(int aD);
         void setEP(int eP);
     private:
-        const std::string _name;
+        std::string _name;
         int _hitPoints;
         int _energyPoints;
         int _attackDamage;

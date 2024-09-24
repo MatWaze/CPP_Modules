@@ -46,8 +46,8 @@ TEST_CASE("Testing FragTrap class")
     
     SUBCASE("Checking FragTrap created with copy assignment operator")
     {
-        CHECK_EQ(matevos2.getName(), "nameless");
-        CHECK_NE(matevos2.getName(), "matevos");
+        CHECK_EQ(matevos2.getName(), "matevos");
+        CHECK_NE(matevos2.getName(), "nameless");
 
         CHECK_EQ(matevos2.getAD(), matevos1.getAD());
         CHECK_EQ(matevos2.getHP(), matevos1.getHP());
