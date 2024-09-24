@@ -14,7 +14,7 @@ int	main2(void)
 		temp = zom1;
 		zom1++;
 		temp->announce();
-    }
+	}
 	delete[] first;
 	return (0);
 }

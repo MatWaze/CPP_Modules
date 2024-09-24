@@ -5,7 +5,6 @@
 #include <sstream>
 #include <string>
 
-// Test case using doctest
 TEST_CASE("Testing Harl class methods")
 {
 	Harl harl = Harl();

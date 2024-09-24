@@ -8,6 +8,12 @@ HumanB::HumanB(std::string n)
 	this->_weapon = NULL;
 }
 
+HumanB::~HumanB()
+{
+	std::cout << "HumanB " << this->_name
+	<< " was destroyed" << std::endl;
+}
+
 void HumanB::attack(void)
 {
 	std::cout << this->_name

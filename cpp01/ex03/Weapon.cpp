@@ -1,4 +1,5 @@
 #include "Weapon.hpp"
+#include <iostream>
 
 void Weapon::setType(std::string newType)
 {
@@ -6,7 +7,7 @@ void Weapon::setType(std::string newType)
 }
 
 // const member function communicates to users
-// of the class that calling getType 
+// of the class that calling getType
 // does not change the state of the object
 
 const std::string& Weapon::getType() const
@@ -21,5 +22,5 @@ Weapon::Weapon(std::string name)
 
 Weapon::Weapon(void)
 {
-
+	std::cout << "Weapon default constructor called" << std::endl;
 }

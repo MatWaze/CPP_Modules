@@ -1,13 +1,44 @@
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "/Users/mamazari/Desktop/42-cursus/CPP_Modules/doctest.h"
+#include <iostream>
 #include "Fixed.hpp"
 
-int main( void )
+TEST_CASE("Testing Fixed class")
 {
     Fixed a;
     Fixed b( a );
     Fixed c;
     c = b;
-    std::cout << a.getRawBits() << std::endl;
-    std::cout << b.getRawBits() << std::endl;
-    std::cout << c.getRawBits() << std::endl;
-    return 0;
+    Fixed d = b;
+
+    SUBCASE("Checking raw bits value")
+    {
+        CHECK_EQ(a.getRawBits(), 0);
+        CHECK_EQ(b.getRawBits(), 0);
+        CHECK_EQ(c.getRawBits(), 0);
+        CHECK_EQ(d.getRawBits(), 0);
+    }
+
+    SUBCASE("Checking setRawBits method")
+    {
+        a.setRawBits(5);
+        b.setRawBits(1);
+        c.setRawBits(4);
+        d.setRawBits(5);
+
+        CHECK_EQ(a.getRawBits(), 5);
+        CHECK_EQ(b.getRawBits(), 1);
+        CHECK_EQ(c.getRawBits(), 4);
+        CHECK_EQ(d.getRawBits(), 5);
+
+        Fixed   e;
+        e.setRawBits(8);
+        Fixed   f = e;
+        Fixed   g;
+        g = e;
+        CHECK_EQ(g.getRawBits(), f.getRawBits());
+        CHECK_EQ(g.getRawBits(), 8);
+        CHECK_EQ(f.getRawBits(), 8);
+        CHECK_EQ(e.getRawBits(), 8);
+    }
 }
