@@ -1,12 +1,12 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-ClapTrap::ClapTrap() : _name("nameless")//_attackDamage(0), _energyPoints(10), _hitPoints(10) 
+ClapTrap::ClapTrap() : _name("nameless"), _attackDamage(0), _energyPoints(10), _hitPoints(10) 
 {
     std::cout << "Default ClapTrap constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string n) : _name(n)//, _attackDamage(0), _energyPoints(10), _hitPoints(10)
+ClapTrap::ClapTrap(const std::string n) : _name(n), _attackDamage(0), _energyPoints(10), _hitPoints(10)
 {
     std::cout << "ClapTrap " << n << " created"
     << std::endl;
@@ -24,6 +24,7 @@ ClapTrap&   ClapTrap::operator=(ClapTrap& cT)
         this->_attackDamage = cT._attackDamage;
         this->_energyPoints = cT._energyPoints;
         this->_hitPoints = cT._hitPoints;
+        this->_name = cT._name;
     }
     return *this;
 }
@@ -65,7 +66,12 @@ void    ClapTrap::setHP(int hP)
     this->_hitPoints = hP;
 }
 
-const std::string ClapTrap::getName()
+void    ClapTrap::setName(const std::string name)
+{
+    this->_name = name;
+}
+
+std::string ClapTrap::getName()
 {
     return this->_name;
 }

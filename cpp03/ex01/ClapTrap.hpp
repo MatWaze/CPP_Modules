@@ -18,13 +18,14 @@ class ClapTrap
         int getHP();
         int getAD();
         int getEP();
-        const std::string getName();
+        std::string getName();
         // setters
         void setHP(int hP);
         void setAD(int aD);
         void setEP(int eP);
+        void setName(const std::string name);
     private:
-        const std::string _name;
+        std::string _name;
         int _hitPoints;
         int _energyPoints;
         int _attackDamage;

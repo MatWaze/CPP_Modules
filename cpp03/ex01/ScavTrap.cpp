@@ -2,7 +2,7 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
     std::cout << "ScavTrap default constructor called" << std::endl;
     this->setHP(100);
