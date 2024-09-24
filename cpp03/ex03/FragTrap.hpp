@@ -5,6 +5,8 @@
 
 class   FragTrap : virtual public ClapTrap
 {
+    protected:
+        FragTrap(int);
     public:
         FragTrap();
         FragTrap(const std::string n);
@@ -12,15 +14,6 @@ class   FragTrap : virtual public ClapTrap
         FragTrap& operator=(FragTrap& sT);
         ~FragTrap();
         void highFivesGuys();
-        // getters
-        int getHP();
-        int getAD();
-        int getEP();
-        const std::string getName();
-        // setters
-        void setHP(int hP);
-        void setAD(int aD);
-        void setEP(int eP);
 };
 
 #endif

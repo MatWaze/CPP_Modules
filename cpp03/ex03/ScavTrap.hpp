@@ -5,6 +5,8 @@
 
 class ScavTrap : virtual public ClapTrap
 {
+    protected:
+        ScavTrap(int);
     public:
         ScavTrap();
         ScavTrap(const std::string n);
@@ -13,15 +15,6 @@ class ScavTrap : virtual public ClapTrap
         ~ScavTrap();
         void guardGate(void);
         void attack(const std::string n);
-         // getters
-        int getHP();
-        int getAD();
-        int getEP();
-        const std::string getName();
-        // setters
-        void setHP(int hP);
-        void setAD(int aD);
-        void setEP(int eP);
 };
 
 #endif

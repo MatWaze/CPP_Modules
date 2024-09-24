@@ -8,6 +8,14 @@ FragTrap::FragTrap()
     std::cout << "Default FragTrap constructor called" << std::endl;
     ClapTrap::setHP(100);
     ClapTrap::setAD(30);
+    ClapTrap::setEP(100);
+}
+
+FragTrap::FragTrap(int)
+{
+    std::cout << "Protected FragTrap constructor called" << std::endl;
+    ClapTrap::setHP(100);
+    ClapTrap::setAD(30);
 }
 
 FragTrap::~FragTrap()
@@ -42,37 +50,3 @@ void    FragTrap::highFivesGuys(void)
     std::cout << "Give high five!" << std::endl;
 }
 
-void    FragTrap::setAD(int aD)
-{
-    ClapTrap::setAD(aD);
-}
-
-void    FragTrap::setHP(int hP)
-{
-    ClapTrap::setHP(hP);
-}
-
-void    FragTrap::setEP(int eP)
-{
-    ClapTrap::setEP(eP);
-}
-
-int    FragTrap::getAD()
-{
-    return ClapTrap::getAD();
-}
-
-int    FragTrap::getHP()
-{
-    return ClapTrap::getHP();
-}
-
-int    FragTrap::getEP()
-{
-    return ClapTrap::getEP();
-}
-
-const std::string   FragTrap::getName()
-{
-    return ClapTrap::getName();
-}

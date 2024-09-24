@@ -5,6 +5,14 @@
 ScavTrap::ScavTrap()
 {
     std::cout << "Default ScavTrap constructor called" << std::endl;
+    ClapTrap::setAD(20);
+    ClapTrap::setEP(50);
+    ClapTrap::setHP(100);
+}
+
+ScavTrap::ScavTrap(int)
+{
+    std::cout << "Protected ScavTrap constructor called" << std::endl;
     ClapTrap::setEP(50);
 }
 
@@ -63,40 +71,4 @@ void    ScavTrap::attack(const std::string n)
 void    ScavTrap::guardGate()
 {
     std::cout << "ScavTrap is now in Gatekeeper mode" << std::endl;
-}
-
-void    ScavTrap::setAD(int aD)
-{
-    ClapTrap::setAD(aD);
-}
-
-void    ScavTrap::setHP(int hP)
-{
-    ClapTrap::setHP(hP);
-}
-
-void    ScavTrap::setEP(int eP)
-{
-    ClapTrap::setEP(eP);
-    std::cout << "scav ep: " << eP << std::endl;
-}
-
-int    ScavTrap::getAD()
-{
-    return ClapTrap::getAD();
-}
-
-int    ScavTrap::getHP()
-{
-    return ClapTrap::getHP();
-}
-
-int    ScavTrap::getEP()
-{
-    return ClapTrap::getEP();
-}
-
-const std::string   ScavTrap::getName()
-{
-    return ClapTrap::getName();
 }
