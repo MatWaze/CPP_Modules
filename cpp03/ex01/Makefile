@@ -1,6 +1,6 @@
 name = scavTrap
 c++ = c++
-cflags = -Wall -Wextra -Werror
+flags = -Wall -Wextra -Werror -std=c++98
 src = main.cpp ClapTrap.cpp ScavTrap.cpp
 obj = $(src:.cpp=.o)
 

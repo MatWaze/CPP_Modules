@@ -1,6 +1,6 @@
 name = fragTrap
 c++ = c++
-cflags = -Wall -Wextra -Werror
+flags = -Wall -Wextra -Werror -std=c++98
 src = main.cpp ClapTrap.cpp FragTrap.cpp
 obj = $(src:.cpp=.o)
 

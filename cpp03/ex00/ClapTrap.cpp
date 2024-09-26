@@ -1,18 +1,18 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
-ClapTrap::ClapTrap() : _name("nameless"), _attackDamage(0), _energyPoints(10), _hitPoints(10) 
+ClapTrap::ClapTrap() : _name("nameless"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-    std::cout << "Default constructor called" << std::endl;
+    std::cout << "Default ClapTrap constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string n) : _name(n), _attackDamage(0), _energyPoints(10), _hitPoints(10)
+ClapTrap::ClapTrap(const std::string n) : _name(n), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
     std::cout << "ClapTrap " << n << " created"
     << std::endl;
 }
 
-ClapTrap::ClapTrap(ClapTrap& cT) : _attackDamage(cT._attackDamage), _energyPoints(cT._energyPoints), _hitPoints(cT._hitPoints)
+ClapTrap::ClapTrap(ClapTrap& cT) : _name(cT._name), _hitPoints(cT._hitPoints), _energyPoints(cT._energyPoints), _attackDamage(cT._attackDamage)
 {
     std::cout << "ClapTrap copy constructor called" << std::endl;
 }
