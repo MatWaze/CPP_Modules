@@ -25,7 +25,7 @@ FragTrap::FragTrap(const std::string n) : ClapTrap(n)
     this->setAD(30);
 }
 
-FragTrap&   FragTrap::operator=(FragTrap& fT)
+FragTrap&   FragTrap::operator=(const FragTrap& fT)
 {
     std::cout << "FragTrap copy assignment operator called" << std::endl;
     ClapTrap::operator=(fT);

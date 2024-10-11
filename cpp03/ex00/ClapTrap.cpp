@@ -17,7 +17,7 @@ ClapTrap::ClapTrap(ClapTrap& cT) : _name(cT._name), _hitPoints(cT._hitPoints), _
     std::cout << "ClapTrap copy constructor called" << std::endl;
 }
 
-ClapTrap&   ClapTrap::operator=(ClapTrap& cT)
+ClapTrap&   ClapTrap::operator=(const ClapTrap& cT)
 {
     if (this != &cT)
     {

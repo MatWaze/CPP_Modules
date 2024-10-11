@@ -21,7 +21,7 @@ DiamondTrap::DiamondTrap(DiamondTrap& dT) : ClapTrap(dT), ScavTrap(1), FragTrap(
     std::cout << "DiamondTrap copy constructor called" << std::endl;
 }
 
-DiamondTrap&    DiamondTrap::operator=(DiamondTrap& dT)
+DiamondTrap&    DiamondTrap::operator=(const DiamondTrap& dT)
 {
     std::cout << "DiamondTrap copy assignment operator called" << std::endl;
     ClapTrap::operator=(dT);

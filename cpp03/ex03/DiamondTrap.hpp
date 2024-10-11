@@ -10,7 +10,7 @@ class   DiamondTrap : public ScavTrap, public FragTrap
         DiamondTrap();
         DiamondTrap(const std::string n);
         DiamondTrap(DiamondTrap& dT);
-        DiamondTrap& operator=(DiamondTrap& dT);
+        DiamondTrap& operator=(const DiamondTrap& dT);
         ~DiamondTrap();
         void attack(const std::string n);
         void whoAmI();
