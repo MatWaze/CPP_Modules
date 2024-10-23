@@ -1,6 +1,5 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
-#include <cstddef>
 #include <iomanip>
 #include <ios>
 #include <iostream>
@@ -15,7 +14,7 @@ void PhoneBook::AddContact(Contact c)
 
 void PhoneBook::SearchForContact(int ind)
 {
-	if (ind < index)
+	if (ind >= 0 && ind < index)
 	{
 		Contact c = contacts[ind];
 		std::cout << std::setw(10) << std::right << ind << "|";

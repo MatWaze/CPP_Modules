@@ -1,21 +1,18 @@
 name = phonebook
-cc = c++
+c++ = c++
 flags = -Wall -Wextra -Werror -std=c++98 -pedantic
 src = main.cpp PhoneBook.cpp
 obj = $(src:.cpp=.o)
 
 all : $(name)
 
-sanitize : flags += -g -fsanitize=thread
-sanitize : all
-
 $(name) : $(obj) Makefile
-	$(cc) $(flags) $(obj) -o $(name)
+	$(c++) $(flags) $(obj) -o $(name)
 
 %.o : %.cpp
-	$(cc) $(flags) -c $< -o $@
+	$(c++) $(flags) -c $< -o $@
 	
-clean : 
+clean :
 	rm -f $(obj)
 
 fclean : clean

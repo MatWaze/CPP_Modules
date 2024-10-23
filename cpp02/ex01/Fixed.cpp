@@ -1,4 +1,5 @@
 #include "Fixed.hpp"
+#include <climits>
 #include <cmath>
 
 Fixed::Fixed()
@@ -48,7 +49,14 @@ void Fixed::setRawBits(int const raw)
 Fixed::Fixed(const int intNumber)
 {
     std::cout << "Int constructor called" << std::endl;
-    this->_val = intNumber * (1 << this->_bits);
+    long int    longNum = (long int) intNumber;
+    std::cout << longNum << "\n";
+    if (longNum >= INT_MAX)
+        this->_val = INT_MAX / 256;
+    else if (longNum <= INT_MIN)
+        this->_val = INT_MIN / 256;
+    else
+        this->_val = longNum * (1 << this->_bits);
 }
 
 Fixed::Fixed(const float floatNumber)
@@ -59,12 +67,12 @@ Fixed::Fixed(const float floatNumber)
 
 int Fixed::toInt(void) const
 {
-    return roundf(float(this->_val) / (1 << 8));
+    return roundf(float(this->_val) / (1 << this->_bits));
 }
 
 float Fixed::toFloat(void) const
 {
-    return float(this->_val) / (1 << 8);
+    return float(this->_val) / (1 << this->_bits);
 }
 
 

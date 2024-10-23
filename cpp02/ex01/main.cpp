@@ -1,6 +1,8 @@
+#include <climits>
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "/Users/mamazari/Desktop/42-cursus/CPP_Modules/doctest.h"
 #include "Fixed.hpp"
+
 
 TEST_CASE("Testing Fixed class methods")
 {
@@ -9,6 +11,7 @@ TEST_CASE("Testing Fixed class methods")
     Fixed c = Fixed(12.4999f);
     Fixed d = Fixed(-123);
     Fixed e = Fixed(12.50001f);
+    Fixed f = Fixed(INT_MAX + 1);
 
     std::streambuf* oldBuf = std::cout.rdbuf();
     std::ostringstream oss;
@@ -30,4 +33,5 @@ TEST_CASE("Testing Fixed class methods")
     CHECK(cInt == 12);
     CHECK(dFloat == -123.0);
     CHECK(eInt == 13);
+    CHECK_EQ(f.toInt(), INT_MAX);
 }

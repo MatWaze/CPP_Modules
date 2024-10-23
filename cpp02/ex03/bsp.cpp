@@ -16,7 +16,7 @@ bool    crossProduct(Point const a, Point const b, Point const c, Point const p)
 
     float   bcX = c.getX().toFloat() - b.getX().toFloat();
     float   bcY = c.getY().toFloat() - b.getY().toFloat();
-    
+
     float   caX = a.getX().toFloat() - c.getX().toFloat();
     float   caY = a.getY().toFloat() - c.getY().toFloat();
 

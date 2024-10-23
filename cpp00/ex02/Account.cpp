@@ -10,9 +10,9 @@ void Account::_displayTimestamp(void)
 {
 	std::time_t currentTime = std::time(nullptr);
 
-    std::tm* localTime = std::localtime(&currentTime);
+	std::tm* localTime = std::localtime(&currentTime);
 
-    std::cout << "[" << (localTime->tm_year + 1900);
+	std::cout << "[" << (localTime->tm_year + 1900);
 	if ((localTime->tm_mon + 1) < 10)
 		std::cout << "0" << localTime->tm_mon + 1;
 	else
@@ -25,7 +25,7 @@ void Account::_displayTimestamp(void)
 
 	if (localTime->tm_hour < 10)
 		std::cout << "0" << localTime->tm_hour;
-    else
+	else
 		std::cout << localTime->tm_hour;
 	
 	if (localTime->tm_min < 10)

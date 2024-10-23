@@ -1,7 +1,4 @@
-#include <cctype>
-#include <cstddef>
 #include <iostream>
-#include <string>
 
 class Megaphone
 {
@@ -11,7 +8,7 @@ class Megaphone
 			if (sentence.length() != 0)
 			{
 				for (unsigned long i = 0; i < sentence.length(); i++)
-					std::cout << (char) std::toupper(sentence[i]);
+					std::cout << static_cast<char>(std::toupper(sentence[i]));
 				std::cout << std::endl;
 			}
 			else
