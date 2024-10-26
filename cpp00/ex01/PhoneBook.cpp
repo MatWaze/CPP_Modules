@@ -6,10 +6,10 @@
 			
 void PhoneBook::AddContact(Contact c)
 {
-	if (index < 8)
+	if (index < 2)
 		contacts[index++] = c;
-	else if (index == 8)
-		contacts[7] = c;
+	else if (index == 2)
+		contacts[1] = c;
 }
 
 void PhoneBook::SearchForContact(int ind)
@@ -18,30 +18,30 @@ void PhoneBook::SearchForContact(int ind)
 	{
 		Contact c = contacts[ind];
 		std::cout << std::setw(10) << std::right << ind << "|";
-		if (c.firstName.length() < 10)
-			std::cout << std::setw(10) << std::right << c.firstName << "|";
+		if (c.getName().length() < 10)
+			std::cout << std::setw(10) << std::right << c.getName() << "|";
 		else
-			std::cout << std::setw(10) << std::right << c.firstName.substr(0, 9) + "." << "|";
+			std::cout << std::setw(10) << std::right << c.getName().substr(0, 9) + "." << "|";
 		
-		if (c.lastName.length() < 10)
-			std::cout << std::setw(10) << std::right << c.lastName << "|";
+		if (c.getLastName().length() < 10)
+			std::cout << std::setw(10) << std::right << c.getLastName() << "|";
 		else
-			std::cout << std::setw(10) << std::right << c.lastName.substr(0, 9) + "." << "|";
+			std::cout << std::setw(10) << std::right << c.getLastName().substr(0, 9) + "." << "|";
 			
-		if (c.nickname.length() < 10)
-			std::cout << std::setw(10) << std::right << c.nickname << "|";
+		if (c.getNickname().length() < 10)
+			std::cout << std::setw(10) << std::right << c.getNickname() << "|";
 		else
-			std::cout << std::setw(10) << std::right << c.nickname.substr(0, 9) + "." << "|";
+			std::cout << std::setw(10) << std::right << c.getNickname().substr(0, 9) + "." << "|";
 			
-		if (c.phoneNumber.length() < 10)
-			std::cout << std::setw(10) << std::right << c.phoneNumber << "|";
+		if (c.getPhone().length() < 10)
+			std::cout << std::setw(10) << std::right << c.getPhone() << "|";
 		else
-			std::cout << std::setw(10) << std::right << c.phoneNumber.substr(0, 9) + "." << "|";
+			std::cout << std::setw(10) << std::right << c.getPhone().substr(0, 9) + "." << "|";
 			
-		if (c.darkestSecret.length() < 10)
-			std::cout << std::setw(10) << std::right << c.darkestSecret << "|" << std::endl;
+		if (c.getSecret().length() < 10)
+			std::cout << std::setw(10) << std::right << c.getSecret() << "|" << std::endl;
 		else
-			std::cout << std::setw(10) << std::right << c.darkestSecret.substr(0, 9) + "." << "|" << std::endl;
+			std::cout << std::setw(10) << std::right << c.getSecret().substr(0, 9) + "." << "|" << std::endl;
 	}
 	else
 	{

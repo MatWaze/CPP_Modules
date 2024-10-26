@@ -1,28 +1,24 @@
 #include <iostream>
 
-class Megaphone
+void printUpper(std::string sentence)
 {
-	public:
-		void printUpper(std::string sentence)
-		{
-			if (sentence.length() != 0)
-			{
-				for (unsigned long i = 0; i < sentence.length(); i++)
-					std::cout << static_cast<char>(std::toupper(sentence[i]));
-				std::cout << std::endl;
-			}
-			else
-				std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		}
-};
+	for (size_t i = 0; i < sentence.length(); i++)
+	{
+		std::cout << static_cast<char>(std::toupper(sentence[i])) << std::endl;
+	}
+}
 
 int	main(int argc, char **argv)
 {
-	Megaphone var;
-	std::string str = "";
+	if (argc > 1)
+	{
+		std::string str = "";
 
-	for (int i = 1; i < argc; i++)
-		str += argv[i];
-	var.printUpper(str);
+		for (int i = 1; i < argc; i++)
+			str += argv[i];
+		printUpper(str);
+	}
+	else
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	return (0);
 }

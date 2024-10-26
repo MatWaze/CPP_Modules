@@ -1,7 +1,7 @@
 name = phonebook
 c++ = c++
 flags = -Wall -Wextra -Werror -std=c++98 -pedantic
-src = main.cpp PhoneBook.cpp
+src = main.cpp PhoneBook.cpp Contact.cpp
 obj = $(src:.cpp=.o)
 
 all : $(name)
@@ -20,4 +20,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY: all clean fclean
+.PHONY: all clean fclean re

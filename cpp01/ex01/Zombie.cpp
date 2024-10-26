@@ -1,13 +1,13 @@
 #include "Zombie.hpp"
 
-void Zombie::announce(void)
+void Zombie::announce()
 {
 	std::cout << this->_name
 	<< ": BraiiiiiiinnnzzzZ..."
 	<< std::endl;
 }
 
-Zombie::~Zombie(void)
+Zombie::~Zombie()
 {
 	std::cout << this->_name
 	<< " died"
@@ -19,7 +19,7 @@ Zombie::Zombie(std::string name)
 	this->_name = name;
 }
 
-Zombie::Zombie(void)
+Zombie::Zombie()
 {
 	std::cout << "Zombie default constructor" << std::endl;
 }
