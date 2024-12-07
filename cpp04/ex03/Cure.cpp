@@ -1,6 +1,7 @@
 #include "Cure.hpp"
-#include "ex03/ICharacter.hpp"
+#include <cstddef>
 #include <iostream>
+#include <new>
 
 Cure::Cure()
 {
@@ -8,21 +9,22 @@ Cure::Cure()
     std::cout << "Default Cure constructor called" << std::endl;
 }
 
-Cure::Cure(Cure& Cure)
+Cure::Cure(Cure& cure)
 {
-    this->_materiaType = Cure._materiaType;
+    this->_materiaType = cure.getType();
     std::cout << "Cure copy constructor called" << std::endl;
 }
 
-Cure&    Cure::operator=(const Cure& Cure)
+Cure&    Cure::operator=(const Cure& cure)
 {
+    (void) cure;
     std::cout << "Cure copy assignment operator called" << std::endl;
     return *this;
 }
 
 Cure::~Cure()
 {
-    std::cout << "Cure destructor called" << std::endl;
+    std::cout << "Cure destructor called " << std::endl;
 }
 
 void    Cure::use(ICharacter& target)
@@ -32,6 +34,16 @@ void    Cure::use(ICharacter& target)
 
 AMateria*    Cure::clone() const
 {
-    Cure    *newCure = new Cure();
+    std::cout << "Cure: clone: ";
+    Cure    *newCure = NULL;
+    try
+    {
+        std::cout << "success" << std::endl;
+        newCure = new Cure();
+    }
+    catch (std::bad_alloc&)
+    {
+        std::cout << "Memory allocation failed" << std::endl;
+    }
     return newCure;
 }

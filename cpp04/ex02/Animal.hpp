@@ -12,8 +12,8 @@ class   Animal
         std::string type;
     public:
         virtual ~Animal();
-        std::string getType();
-        virtual void makeSound();
+        std::string getType() const;
+        virtual void makeSound() const = 0; // pure virtual method
 };
 
 #endif

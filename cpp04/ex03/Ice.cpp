@@ -1,5 +1,5 @@
 #include "Ice.hpp"
-#include "ex03/ICharacter.hpp"
+#include <cstddef>
 #include <iostream>
 
 Ice::Ice()
@@ -16,22 +16,34 @@ Ice::Ice(Ice& ice)
 
 Ice&    Ice::operator=(const Ice& ice)
 {
+    (void) ice;
     std::cout << "Ice copy assignment operator called" << std::endl;
     return *this;
 }
 
 Ice::~Ice()
 {
-    std::cout << "Ice destructor called" << std::endl;
+    std::cout << "Ice destructor called " << std::endl;
 }
 
 void    Ice::use(ICharacter& target)
 {
-    std::cout << "* shoots an ice bolt at " << target.getName() << std::endl;
+    std::cout << "* shoots an ice bolt at " << target.getName()
+    << " *" << std::endl;
 }
 
 AMateria*   Ice::clone() const
 {
-    Ice *newIce = new Ice();
+    Ice *newIce = NULL;
+    std::cout << "Ice: clone: ";
+    try
+    {
+        std::cout << "success" << std::endl;
+        newIce = new Ice();
+    }
+    catch (std::bad_alloc&)
+    {
+        std::cout << "Memory allocation failed" << std::endl;
+    }
     return newIce;
 }

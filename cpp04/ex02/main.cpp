@@ -2,19 +2,28 @@
 #include "Cat.hpp"
 #include <iostream>
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "/Users/mamazari/Desktop/42-cursus/CPP_Modules/doctest.h"
+#include "../doctest.h"
 #include <string>
 
 TEST_CASE("Testing Animal class")
 {
     Animal  *b = new Cat();
     Animal  *c = new Dog();
+
     Animal&  animal2 = *b;
     Animal&  animal3 = *c;
 
+    Cat cat;
+    Cat cat2 = cat;
+
+    Dog dog;
+    Dog dog2 = dog;
+
     CHECK_EQ(b->getType(), "Cat");
     CHECK_EQ(c->getType(), "Dog");
-
+    CHECK_EQ(cat.getType(), cat2.getType());
+    CHECK_EQ(dog.getType(), dog2.getType());
+    
     CHECK_EQ(animal2.getType(), "Cat");
     CHECK_EQ(animal3.getType(), "Dog");
     

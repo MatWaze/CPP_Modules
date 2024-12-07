@@ -1,7 +1,7 @@
-name = animal
+name = brain
 c++ = c++
 flags = -Wall -Wextra -Werror
-src = test.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
+src = main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
 obj = $(src:.cpp=.o)
 
 all : $(name)

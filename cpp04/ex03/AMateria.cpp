@@ -32,3 +32,8 @@ std::string const & AMateria::getType() const
 {
     return this->_materiaType;
 }
+
+void    AMateria::use(ICharacter& target)
+{
+    this->_materiaType = target.getName();
+}

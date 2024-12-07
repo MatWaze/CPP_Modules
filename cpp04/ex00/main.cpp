@@ -1,18 +1,51 @@
-#include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongCat.hpp"
-#include <string>
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "/Users/mamazari/Desktop/42-cursus/CPP_Modules/doctest.h"
+#include "Cat.hpp"
 #include <iostream>
+#include "WrongCat.hpp"
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "../doctest.h"
+
+TEST_CASE("Creating array of Animals and filling it with Cats and Dogs")
+{
+    Animal  *animals[10];
+
+    for (int i = 0; i < 5; i++)
+        animals[i] = new Cat();
+
+    for (int i = 5; i < 10; i++)
+        animals[i] = new Dog();
+
+    CHECK((animals[0]->getType() == "Cat" && animals[1]->getType() == "Cat" && \
+    animals[2]->getType() == "Cat" && animals[3]->getType() == "Cat" && \
+    animals[4]->getType() == "Cat"));
+
+    CHECK((animals[5]->getType() == "Dog" && animals[6]->getType() == "Dog" && \
+    animals[7]->getType() == "Dog" && animals[8]->getType() == "Dog" && \
+    animals[9]->getType() == "Dog"));
+
+    std::streambuf *oldBuf = std::cout.rdbuf();
+    std::ostringstream oss;
+    std::cout.rdbuf(oss.rdbuf());
+    
+    animals[0]->makeSound();
+    animals[5]->makeSound();
+
+    std::string output = oss.str();
+    std::cout.rdbuf(oldBuf);
+    
+    CHECK_EQ(output, "Meooooow\nWoooof\n");
+
+    for (int i = 0; i < 10; i++)
+        delete animals[i];
+}
 
 TEST_CASE("Testing Animal class")
 {
     Animal  *a = new Animal();
     Animal  *b = new Cat();
     Animal  *c = new Dog();
-    Animal&  animal2 = *b; // if b was Cat() instead of new Cat(), then animal2 wouldn't have had makeSound of Cat
-    Animal&  animal3 = *c;
+    Animal  &animal2 = *b;
+    Animal  &animal3 = *c;
 
     CHECK_EQ(a->getType(), "Animal");
     CHECK_EQ(b->getType(), "Cat");
@@ -31,8 +64,8 @@ TEST_CASE("Testing Animal class")
     c->makeSound();
 
     std::string output = oss.str();
-    CHECK_EQ("*unknown animal sound*\nMeooooow\nWoooof\n", output);
     std::cout.rdbuf(oldBuf);
+    CHECK_EQ("*unknown animal sound*\nMeooooow\nWoooof\n", output);
 
     std::ostringstream oss2;
     std::cout.rdbuf(oss2.rdbuf());
@@ -41,8 +74,9 @@ TEST_CASE("Testing Animal class")
     animal3.makeSound();
 
     output = oss2.str();
-    CHECK_EQ(output, "Meooooow\nWoooof\n");
     std::cout.rdbuf(oldBuf);
+    
+    CHECK_EQ(output, "Meooooow\nWoooof\n");
 
     delete a;
     delete b;
@@ -68,8 +102,9 @@ TEST_CASE("Testing Cat class")
     cat3->makeSound();
 
     std::string output = oss.str();
-    CHECK_EQ(output, "Meooooow\nMeooooow\nMeooooow\n");
     std::cout.rdbuf(oldBuf);
+    
+    CHECK_EQ(output, "Meooooow\nMeooooow\nMeooooow\n");
     delete cat2;
 }
 
@@ -92,8 +127,9 @@ TEST_CASE("Testing Dog class")
     dog3->makeSound();
 
     std::string output = oss.str();
-    CHECK_EQ(output, "Woooof\nWoooof\nWoooof\n");
     std::cout.rdbuf(oldBuf);
+    
+    CHECK_EQ(output, "Woooof\nWoooof\nWoooof\n");
     delete dog2;
 }
 
@@ -125,7 +161,8 @@ TEST_CASE("Testing Wrong classes")
     ans += "*unknown WrongAnimal sound*\n";
     ans += "*unknown WrongAnimal sound*\n";
     ans += "Meooooow\n";
-    CHECK_EQ(output, ans);
+    
     std::cout.rdbuf(oldBuf);
+    CHECK_EQ(output, ans);
     delete wrong1;
 }

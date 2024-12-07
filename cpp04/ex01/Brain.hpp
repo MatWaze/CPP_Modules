@@ -9,7 +9,7 @@ class   Brain
         Brain(Brain& brain);
         Brain& operator=(const Brain& brain);
         ~Brain();
-        std::string ideas[100];
+        std::string ideas[100]; // empty strs
         void setIdeas(Brain *brain, const Brain *otherBrain);
 };
 

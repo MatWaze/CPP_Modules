@@ -2,28 +2,23 @@
 #include "Cat.hpp"
 #include <iostream>
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "/Users/mamazari/Desktop/42-cursus/CPP_Modules/doctest.h"
-#include <cstdio>
-#include <memory>
-#include <stdexcept>
-#include <string>
-#include <array>
+#include "../doctest.h"
 
-std::string exec(const char* cmd)
-{
-    std::array<char, 128> buffer;
-    std::string result;
-    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
-    if (!pipe)
-    {
-        throw std::runtime_error("popen() failed!");
-    }
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr)
-    {
-        result += buffer.data();
-    }
-    return result;
-}
+
+// int main2()
+// {
+//     Animal  *animals[10];
+
+//     for (int i = 0; i < 5; i++)
+//         animals[i] = new Cat();
+
+//     for (int i = 5; i < 10; i++)
+//         animals[i] = new Dog();
+
+//     for (int i = 0; i < 10; i++)
+//         delete animals[i];
+//     return (0);
+// }
 
 TEST_CASE("Creating array of Animals and filling it with Cats and Dogs")
 {
@@ -51,12 +46,10 @@ TEST_CASE("Creating array of Animals and filling it with Cats and Dogs")
     animals[5]->makeSound();
 
     std::string output = oss.str();
-    CHECK_EQ(output, "Meooooow\nWoooof\n");
     std::cout.rdbuf(oldBuf);
+    
+    CHECK_EQ(output, "Meooooow\nWoooof\n");
 
     for (int i = 0; i < 10; i++)
         delete animals[i];
-    
-    output = exec("leaks animal");
-    CHECK_NE(output.find("0 leaks"), std::string::npos);
 }

@@ -2,10 +2,12 @@
 # define ICHARACTER_HPP
 
 #include <string>
-#include "AMateria.hpp"
+
+class AMateria;
 
 class   ICharacter
 {
+    // doesn't have data members unlike AMateria
     public:
         virtual ~ICharacter() {}
         virtual std::string const & getName() const = 0;

@@ -1,33 +1,65 @@
 #include "Dog.hpp"
+#include "Brain.hpp"
 #include <iostream>
+#include <new>
 
-Dog::Dog() : _brain(new Brain())
+Dog::Dog()
 {
-    this->type = "Dog";
     std::cout << "Default Dog constructor called" << std::endl;
+
+    this->type = "Dog";
+    try
+    {
+        this->_brain = new Brain();
+    }
+    catch (std::bad_alloc&)
+    {
+        std::cout << "Memory allocation failed" << std::endl;
+    }
 }
 
-Dog::Dog(Dog& Dog) : Animal(Dog), _brain(new Brain())
+Dog::Dog(Dog& dog) : Animal(dog)
 {
     std::cout << "Dog copy constructor called" << std::endl;
+
+    this->type = "Dog";
+    try
+    {
+        this->_brain = new Brain(*dog._brain);
+    }
+    catch (std::bad_alloc&)
+    {
+        std::cout << "Memory allocation failed" << std::endl;
+    }
 }
 
-Dog&    Dog::operator=(Dog& Dog)
+Dog&    Dog::operator=(Dog& dog)
 {
-    if (this != &Dog)
+    std::cout << "Dog assignment operator called" << std::endl;
+
+    if (this != &dog)
     {
-        this->type = Dog.type;
+        try
+        {
+            delete this->_brain;
+            this->_brain = new Brain(*dog._brain);
+        }
+        catch (std::bad_alloc&)
+        {
+            std::cout << "Memory allocation failed" << std::endl;
+        }
     }
     return *this;
 }
 
 Dog::~Dog()
 {
-    delete this->_brain;
     std::cout << "Default Dog destructor called" << std::endl;
+
+    delete this->_brain;
 }
 
-void    Dog::makeSound()
+void    Dog::makeSound() const
 {
     std::cout << "Woooof" << std::endl;
 }
