@@ -1,32 +1,34 @@
-#ifndef FORM
-# define FORM
+#ifndef AFORM
+# define AFORM
 
 #include <string>
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
     private:
         const int _gradeExec;
         const int _gradeSign;
         const std::string _name;
         bool _isSigned;
-    
-    public:
-        Form();
-        Form(Form &f);
-        Form(std::string name, int gradeSign, int gradeExec);
-        ~Form();
 
-        Form    &operator=(const Form &f);
+    public:
+        AForm();
+        AForm(AForm &f);
+        AForm(std::string name, int gradeSign, int gradeExec);
+
+        // virtual destructor for proper deletion of base class
+        virtual ~AForm();
+
+        AForm    &operator=(const AForm &f);
 
         class GradeTooHighException: public std::exception
         {
             public:
                 const char * what() const throw();
         };
-        
+
         class GradeTooLowException: public std::exception
         {
             public:
@@ -38,9 +40,10 @@ class Form
         int   getGradeSign() const;
         int   getGradeExec() const;
 
-        void    beSigned(Bureaucrat &b);
+        virtual void    beSigned(Bureaucrat &b);
+        virtual void    execute(Bureaucrat const &executor) = 0;
 };
 
-std::ostream    &operator<<(std::ostream &os, const Form &f);
+std::ostream    &operator<<(std::ostream &os, const AForm &f);
 
 #endif

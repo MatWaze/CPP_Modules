@@ -95,11 +95,16 @@ void    Bureaucrat::decrementGrade()
         this->_grade = newGrade;
 }
 
-void    Bureaucrat::signForm(Form &f)
+void    Bureaucrat::signForm(AForm &f)
 {
     if (f.getIsSigned())
         std::cout << this->getName() << " signed " << f.getFormName() << std::endl;
     else
         std::cout << this->getName() << " couldn't sign " << f.getFormName()
         << " because the grade is outside the boundaries" << std::endl;
+}
+
+void    Bureaucrat::executeForm(AForm &f)
+{
+    
 }
