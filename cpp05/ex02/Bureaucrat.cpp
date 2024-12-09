@@ -104,7 +104,18 @@ void    Bureaucrat::signForm(AForm &f)
         << " because the grade is outside the boundaries" << std::endl;
 }
 
-void    Bureaucrat::executeForm(AForm &f)
+void    Bureaucrat::executeForm(AForm &f) const
 {
-    
+	try
+	{
+		f.execute(*this);
+		std::cout << this->getName() << " executed " << f.getFormName() << std::endl;
+	}
+	catch (std::exception &ex)
+	{
+		std::cout << "Can't execute the "
+        << f.getFormName() << " form: " 
+        << ex.what() << std::endl;
+	}	
 }
+

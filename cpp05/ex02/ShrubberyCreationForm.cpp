@@ -1,14 +1,12 @@
 #include "ShrubberyCreationForm.hpp"
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
-#include <fstream>
 #include <iostream>
+#include <fstream>
 #include <string>
-#include <sys/dirent.h>
 #include <unistd.h>
 #include <dirent.h>
 
-ShrubberyCreationForm::ShrubberyCreationForm()
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137)
 {
     std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
 }
@@ -25,7 +23,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm &pardon) : AF
     this->_target = pardon._target;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", 145, 137)
 {
     std::cout << "ShrubberyCreationForm target constructor called" << std::endl;
 
@@ -50,26 +48,28 @@ std::string ShrubberyCreationForm::getTarget() const
     return this->_target;
 }
 
-void    ShrubberyCreationForm::execute(Bureaucrat const &executor)
+void    ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
-    if (executor.getGrade() == 137)
+    if (executor.getGrade() == this->getGradeExec())
     {
         std::string fileName = this->getTarget() + "_shrubbery";
-        std::ofstream   createFile(fileName);
+        std::ofstream   createFile(fileName.c_str());
 
         if (createFile.is_open())
         {
-            createFile << "              v .   ._, |_  ., \
-           `-._\\/  .  \\ /    |/_ \
-               \\  _\\, y | \\// \
-         _\\_.___\\, \\/ -.\\|| \
-           `7-,--.`._||  / / , \
-           /'     `-. `./ / |/_.' \
-                     |    |// \
-                     |_    / \
-                     |-   | \
-                     |   =| \
-                     |    | \
+	    std::cout << "Writing tree to " << fileName << std::endl;
+
+            createFile << "              v .   ._, |_  ., \n\
+           `-._\\/  .  \\ /    |/_ \n\
+               \\  _\\, y | \\// \n\
+         _\\_.___\\, \\/ -.\\|| \\ \n\
+           `7-,--.`._||  / / , \\ \n\
+           /'     `-. `./ / |/_.' \\ \n\
+                     |    |// \\ \n\
+                     |_    / \\ \n\
+                     |-   | \\ \n\
+                     |   =| \\ \n\
+                     |    | \\ \n\
 --------------------/ ,  . \\--------._" << std::endl;
 
             createFile.close();
@@ -77,7 +77,7 @@ void    ShrubberyCreationForm::execute(Bureaucrat const &executor)
         else
             std::cout << "Unable to create " << fileName << std::endl;
     }
-    else if (executor.getGrade() < 137)
+    else if (executor.getGrade() < this->getGradeExec())
         throw AForm::GradeTooHighException();
     else
         throw  AForm::GradeTooLowException();

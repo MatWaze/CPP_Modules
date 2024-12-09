@@ -7,6 +7,7 @@ class RobotomyRequestForm : public AForm
 {
     private:
         std::string _target;
+        static bool _isSeeded;
     public:
         RobotomyRequestForm();
         RobotomyRequestForm(std::string target);
@@ -15,7 +16,7 @@ class RobotomyRequestForm : public AForm
         
         RobotomyRequestForm  &operator=(const RobotomyRequestForm &pardon);
 
-        void    execute(Bureaucrat const &executor);
+        void    execute(Bureaucrat const &executor) const;
         std::string getTarget() const;
 };
 

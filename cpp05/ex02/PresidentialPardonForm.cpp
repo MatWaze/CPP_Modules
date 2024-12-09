@@ -1,9 +1,9 @@
 #include "PresidentialPardonForm.hpp"
-#include "AForm.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <string>
 
-PresidentialPardonForm::PresidentialPardonForm()
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5)
 {
     std::cout << "PresidentialPardonForm default constructor called" << std::endl;
 }
@@ -20,7 +20,7 @@ PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm &pardon) :
     this->_target = pardon._target;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target)
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", 25, 5) 
 {
     std::cout << "PresidentialPardonForm target constructor called" << std::endl;
 
@@ -44,3 +44,16 @@ std::string PresidentialPardonForm::getTarget() const
 {
     return this->_target;
 }
+
+void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
+{
+	if (executor.getGrade() == this->getGradeExec())
+		std::cout << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
+	else if (executor.getGrade() < this->getGradeExec())
+		throw AForm::GradeTooHighException();
+	else
+		throw AForm::GradeTooLowException();
+}
+
+
+

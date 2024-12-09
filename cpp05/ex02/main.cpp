@@ -1,5 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include <exception>
 #include <iostream>
 
@@ -7,15 +9,16 @@ int main()
 {
     try
     {
-        Bureaucrat b(150, "Mat");
-        PresidentialPardonForm  f("house");
+        // Bureaucrat b(5, "Matevos");
+        // Bureaucrat c(137, "Mat");
+        // Bureaucrat d(45, "Ma");
+        Bureaucrat e(45, "Ma");
 
-        PresidentialPardonForm  f2 = f;
-        
-        std::cout << f2.getTarget() << std::endl;
-        std::cout << f.getTarget() << std::endl;
-        // f.beSigned(b);
-        std::cout << b << std::endl;
+        // PresidentialPardonForm  f("house");
+        // RobotomyRequestForm  g("house");
+        ShrubberyCreationForm  h("house");
+
+        e.executeForm(h);
     }
     catch (std::exception &err)
     {

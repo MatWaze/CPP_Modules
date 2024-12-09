@@ -2,8 +2,7 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 
-AForm::AForm() 
-    : _gradeExec(1), _gradeSign(1), _name("default form")
+AForm::AForm() :  _gradeExec(1), _gradeSign(1), _name("default form")
 {
     std::cout << "AForm default constructor called" << std::endl;
     
