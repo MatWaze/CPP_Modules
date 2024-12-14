@@ -49,7 +49,7 @@ std::pair<bool, double>    isDouble(std::string &str)
 
     double d = std::atof(str.c_str());
 
-    return std::pair<bool, double> {isSpecialz || isDouble, d};
+    return std::pair<bool, double> (isSpecialz || isDouble, d);
 }
 
 bool    isNumeric(std::string &str)
@@ -59,7 +59,7 @@ bool    isNumeric(std::string &str)
     if (str[i] == '-' || str[i] == '+')
         i++;
 
-    for (; i < str.length(); i++)
+    for (; i < static_cast<int>(str.length()); i++)
         if (!std::isdigit(str[i]))  return false;
     return true;
 }
@@ -71,9 +71,9 @@ std::pair<bool, int>    isInt(std::string &str)
     if (isNumeric(str) && !(str.length() > 11 ||\
         num > INT_MAX || \
         num < INT_MIN))
-        return std::pair<bool, int> {true, num};
+        return std::pair<bool, int> (true, num);
     
-    return std::pair<bool, int> {false, -1};
+    return std::pair<bool, int> (false, -1);
 }
 
 std::pair<bool, float>    isFloat(std::string &str)
@@ -109,6 +109,6 @@ std::pair<bool, float>    isFloat(std::string &str)
     bool isSpecialz = str == "nanf" || isInff(str);
 
     float f = static_cast<float>(std::atof(str.c_str()));
-    return std::pair<bool, float> {isSpecialz || isFloat, f};
+    return std::pair<bool, float> (isSpecialz || isFloat, f);
 }
 

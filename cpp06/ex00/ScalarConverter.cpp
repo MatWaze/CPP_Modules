@@ -20,22 +20,35 @@ void    ScalarConverter::convert(std::string &str)
     {
         char    c = *(str.c_str());
         convertChar(c);
+        return;
     }
-    else if (std::pair<bool, int> ans = isInt(str); ans.first == true)
+
+    std::pair<bool, int> i = isInt(str);
+    
+    if (i.first == true)
     {
-        int integer = ans.second;
+        int integer = i.second;
         convertInt(integer);
+        return;
     }
-    else if (std::pair<bool, float> f = isFloat(str); f.first)
+
+    std::pair<bool, float> f = isFloat(str);
+    
+    if (f.first)
     {
         float   flt = f.second;
         convertFloat(flt, str);
+        return;
     }
-    else if (std::pair<bool, double> d = isDouble(str); d.first == true)
+
+    std::pair<bool, double> d = isDouble(str);
+    
+    if (d.first == true)
     {
         double db = d.second;
         convertDouble(db);
+        return;
     }
-    else
-        convertInvalid();
+
+    convertInvalid();
 }

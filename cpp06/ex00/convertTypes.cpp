@@ -1,6 +1,7 @@
 #include <cfloat>
 #include <climits>
 #include <iostream>
+#include <cstdlib>
 
 void    printChar(int s)
 {
@@ -14,6 +15,7 @@ void    printChar(int s)
         std::cout << "impossible";
     std::cout << std::endl;
 }
+    double d = 0.;
 
 void    convertInvalid()
 {
@@ -24,9 +26,6 @@ void    convertChar(char c)
 {
     std::cout << "char: " << c << std::endl;
     std::cout << "int: " << static_cast<int>(c) << std::endl;
-
-    float f = static_cast<float>(c);
-    double d = static_cast<double>(c);
 
     std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
     std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
@@ -58,7 +57,7 @@ void    convertFloat(float flt, std::string &str)
     std::cout << "float: " << flt << "f" << std::endl;
 
     if (flt > FLT_MAX || flt < -FLT_MAX)
-        std::cout << "double: " << std::atof(str.c_str()) << std::endl;
+        std::cout << "double: " << atof(str.c_str()) << std::endl;
     else
         std::cout << "double: " << static_cast<double>(flt) << std::endl;
 }
