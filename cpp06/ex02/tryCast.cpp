@@ -13,7 +13,7 @@ bool    tryCastARef(Base &p)
         A   a = dynamic_cast<A&>(p);
         ans = true;               
     }
-    catch (std::bad_cast &ex)
+    catch (std::exception &ex)
     {
         (void) ex;
     }
@@ -29,7 +29,7 @@ bool    tryCastBRef(Base &p)
         B   b = dynamic_cast<B&>(p);
         ans = true;               
     }
-    catch (std::bad_cast &ex)
+    catch (std::exception &ex)
     {
         (void) ex;
     }
@@ -45,7 +45,7 @@ bool    tryCastCRef(Base &p)
         C   c = dynamic_cast<C&>(p);
         ans = true;               
     }
-    catch (std::bad_cast &ex)
+    catch (std::exception &ex)
     {
         (void) ex;
     }
