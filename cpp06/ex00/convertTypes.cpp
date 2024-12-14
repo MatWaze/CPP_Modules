@@ -57,7 +57,7 @@ void    convertFloat(float flt, std::string &str)
     std::cout << "float: " << flt << "f" << std::endl;
 
     if (flt > FLT_MAX || flt < -FLT_MAX)
-        std::cout << "double: " << atof(str.c_str()) << std::endl;
+        std::cout << "double: " << std::atof(str.c_str()) << std::endl;
     else
         std::cout << "double: " << static_cast<double>(flt) << std::endl;
 }
