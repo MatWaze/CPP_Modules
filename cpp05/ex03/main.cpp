@@ -1,7 +1,5 @@
 #include "Bureaucrat.hpp"
 #include "Intern.hpp"
-#include <exception>
-#include <iostream>
 
 int main()
 {
@@ -12,5 +10,6 @@ int main()
 
     if (form)
         form->execute(b);
+    delete form;
     return 0;
 }
