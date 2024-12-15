@@ -1,7 +1,7 @@
 name = convert
 c++ = c++
 flags = -Wall -Wextra -Werror -std=c++98
-src = main.cpp ScalarConverter.cpp typeCheck.cpp convertTypes.cpp
+src = test.cpp ScalarConverter.cpp typeCheck.cpp convertTypes.cpp
 obj = $(src:.cpp=.o)
 
 all: $(name)

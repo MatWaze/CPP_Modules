@@ -1,6 +1,6 @@
 #include "File.hpp"
 
-int	main2(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc == 4)
 	{
@@ -8,12 +8,7 @@ int	main2(int argc, char **argv)
 		f.writeToFile();
 	}
 	else
-		std::cout << "Wrong number of arguments" << std::endl;
+		std::cout << "Usage: ./sed original_file string_from string_to" << std::endl;
 	return (0);
 }
 
-int	main(int argc, char **argv)
-{
-	main2(argc, argv);
-	system("leaks sed");
-}

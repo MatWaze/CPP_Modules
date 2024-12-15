@@ -24,7 +24,8 @@ void    convertInvalid()
 
 void    convertChar(char c)
 {
-    std::cout << "char: " << c << std::endl;
+    printChar(c);
+
     std::cout << "int: " << static_cast<int>(c) << std::endl;
 
     std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
@@ -34,9 +35,19 @@ void    convertChar(char c)
 void    convertInt(int integer)
 {
     printChar(integer);
+    
     std::cout << "int: " << integer << std::endl;
-    std::cout << "float: " << static_cast<float>(integer) << ".0f" << std::endl;
-    std::cout << "double: " << static_cast<double>(integer) << ".0" << std::endl;
+
+    if (integer < 1000000 && integer > -1000000)
+    {
+        std::cout << "float: " << static_cast<float>(integer) << ".0f" << std::endl;
+        std::cout << "double: " << static_cast<double>(integer) << ".0" << std::endl;
+    }
+    else
+    {
+        std::cout << "float: " << static_cast<float>(integer) << "f" << std::endl;
+        std::cout << "double: " << static_cast<double>(integer) << std::endl;
+    }
 }
 
 void    convertFloat(float flt, std::string &str)

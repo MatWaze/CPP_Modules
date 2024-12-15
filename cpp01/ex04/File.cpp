@@ -1,5 +1,6 @@
 #include "File.hpp"
 #include <fstream>
+#include <new>
 
 File::File(std::string fileName, std::string s1, std::string s2)
 {
@@ -10,6 +11,11 @@ File::File(std::string fileName, std::string s1, std::string s2)
 
 void File::writeToFile()
 {
+	bool	conditionToReplace = true;
+
+	if ((this->_s1 == this->_s2) || this->_s1 == "")
+		conditionToReplace = false;
+
 	std::ofstream writeFile(this->_fileName + ".replace");
 	if (writeFile.is_open())
 	{
@@ -17,24 +23,30 @@ void File::writeToFile()
 		if (readFile.is_open())
 		{
 			std::string line;
+			int failed = 0;
+			
 			while (std::getline(readFile, line))
 			{
-				replaceAll(line, this->_s1, this->_s2);
-				writeFile << line << std::endl;
+				if (failed == 0 && conditionToReplace)
+				{
+					replaceAll(line, this->_s1, this->_s2, failed);
+					writeFile << line << std::endl;
+				}
+				else if (failed == 1)
+					break;
 			}
 			readFile.close();
 		}
-		else
-			std::cerr << "Unable to open"
-			<< this->_fileName << std::endl;
-		writeFile.close();	
 	}
 	else
-		std::cerr << "Unable to create " 
+	{
+		std::cerr << "Unable to create "
 		<< this->_fileName + ".replace" << std::endl;
+	}
+	writeFile.close();
 }
 
-void File::replaceAll(std::string& source, const std::string& from, const std::string& to)
+void File::replaceAll(std::string& source, const std::string& from, const std::string& to, int& failed)
 {
 	std::string	newString;
 	newString.reserve(source.length());
