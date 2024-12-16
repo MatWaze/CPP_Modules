@@ -16,8 +16,12 @@ $(name) : $(obj) Makefile
 	$(c++) $(flags) -c $< -o $@
 
 
-fclean :
+clean:
+	rm -f $(obj)
+
+fclean : clean
 	rm -f $(name)
+
 
 re : fclean all
 

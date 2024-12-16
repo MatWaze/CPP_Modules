@@ -1,6 +1,6 @@
 name = base
 c++ = c++
-flags = -Wall -Wextra -Werror
+flags = -Wall -Wextra -Werror -std=c++98
 src = main.cpp Base.cpp tryCast.cpp
 obj = $(src:.cpp=.o)
 

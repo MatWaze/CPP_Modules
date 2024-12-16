@@ -1,6 +1,5 @@
 #include <string>
 #include <climits>
-#include <cmath>
 #include <cstdlib>
 #include <string>
 
@@ -96,6 +95,7 @@ std::pair<bool, float>    isFloat(std::string &str)
                 pointC++;
                 break;
             case 'f':
+            case 'F':
                 fC++;
                 break;
             default:
@@ -105,7 +105,7 @@ std::pair<bool, float>    isFloat(std::string &str)
         }
     }
 
-    bool isFloat = digitC == strLen - 2 && fC == 1 && pointC == 1 && str[str.length() - 1] == 'f';
+    bool isFloat = !(str == ".f" || str == ".F") && (digitC == strLen - 2 && fC == 1 && pointC == 1 && (str[str.length() - 1] == 'f' || str[str.length() - 1] == 'F'));
     bool isSpecialz = str == "nanf" || isInff(str);
 
     float f = static_cast<float>(std::atof(str.c_str()));

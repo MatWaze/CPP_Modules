@@ -1,4 +1,4 @@
-name = fixed
+name = bsp
 c++ = c++
 flags = -Wall -Wextra -Werror -std=c++98 -pedantic
 src = main.cpp Fixed.cpp Point.cpp bsp.cpp

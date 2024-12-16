@@ -1,21 +1,20 @@
 #include "Fixed.hpp"
-#include <climits>
 #include <cmath>
 
 Fixed::Fixed()
 {
-    std::cout << "Default constructor called" << std::endl;
+    std::cout << "Fixed default constructor called" << std::endl;
     this->_val = 0;
 }
 
 Fixed::~Fixed()
 {
-    std::cout << "Destructor called" << std::endl;
+    std::cout << "Fixed destructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& fix)
 {
-    std::cout << "Copy constructor called" << std::endl;
+    std::cout << "Fixed copy constructor called" << std::endl;
     this->_val = fix._val;
 }
 
@@ -23,7 +22,7 @@ Fixed& Fixed::operator=(const Fixed& fix)
 {
     if (this != &fix)
     {
-        std::cout << "Copy assignment operator called" << std::endl;
+        std::cout << "Fixed copy assignment operator called" << std::endl;
         this->_val = fix._val;
     }
     return *this;
@@ -43,36 +42,28 @@ int Fixed::getRawBits(void) const
 
 void Fixed::setRawBits(int const raw)
 {
+    std::cout << "setRawBits member function called" << std::endl;
     this->_val = raw;
 }
 
 Fixed::Fixed(const int intNumber)
 {
     std::cout << "Int constructor called" << std::endl;
-    long int    longNum = (long int) intNumber;
-    std::cout << longNum << "\n";
-    if (longNum >= INT_MAX)
-        this->_val = INT_MAX / 256;
-    else if (longNum <= INT_MIN)
-        this->_val = INT_MIN / 256;
-    else
-        this->_val = longNum * (1 << this->_bits);
+    this->_val = intNumber * (1 << this->_bits);
 }
 
 Fixed::Fixed(const float floatNumber)
 {
     std::cout << "Float constructor called" << std::endl;
-    this->_val = floatNumber * (1 << this->_bits);
+    this->_val = roundf(floatNumber * (1 << this->_bits));
 }
 
 int Fixed::toInt(void) const
 {
-    return roundf(float(this->_val) / (1 << this->_bits));
+    return this->_val / (1 << this->_bits);
 }
 
 float Fixed::toFloat(void) const
 {
-    return float(this->_val) / (1 << this->_bits);
+    return static_cast<float>(this->_val) / (1 << this->_bits);
 }
-
-

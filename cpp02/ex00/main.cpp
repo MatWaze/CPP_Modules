@@ -1,6 +1,5 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "/Users/mamazari/Desktop/42-cursus/CPP_Modules/doctest.h"
-#include <iostream>
+#include "../doctest.h"
 #include "Fixed.hpp"
 
 TEST_CASE("Testing Fixed class")

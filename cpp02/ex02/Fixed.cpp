@@ -3,18 +3,18 @@
 
 Fixed::Fixed()
 {
-    std::cout << "Default constructor called" << std::endl;
+    std::cout << "Fixed default constructor called" << std::endl;
     this->_val = 0;
 }
 
 Fixed::~Fixed()
 {
-    std::cout << "Destructor called" << std::endl;
+    std::cout << "Fixed destructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& fix)
 {
-    std::cout << "Copy constructor called" << std::endl;
+    std::cout << "Fixed copy constructor called" << std::endl;
     this->_val = fix._val;
 }
 
@@ -22,7 +22,7 @@ Fixed& Fixed::operator=(const Fixed& fix)
 {
     if (this != &fix)
     {
-        std::cout << "Copy assignment operator called" << std::endl;
+        std::cout << "Fixed copy assignment operator called" << std::endl;
         this->_val = fix._val;
     }
     return *this;
@@ -42,6 +42,7 @@ int Fixed::getRawBits(void) const
 
 void Fixed::setRawBits(int const raw)
 {
+    std::cout << "setRawBits member function called" << std::endl;
     this->_val = raw;
 }
 
@@ -54,12 +55,12 @@ Fixed::Fixed(const int intNumber)
 Fixed::Fixed(const float floatNumber)
 {
     std::cout << "Float constructor called" << std::endl;
-    this->_val = floatNumber * (1 << this->_bits);
+    this->_val = roundf(floatNumber * (1 << this->_bits));
 }
 
 int Fixed::toInt(void) const
 {
-    return static_cast<int>(roundf(static_cast<float>(this->_val) / (1 << this->_bits)));
+    return this->_val / (1 << this->_bits);
 }
 
 float Fixed::toFloat(void) const
@@ -95,7 +96,10 @@ Fixed Fixed::operator/(const Fixed& fix)
 {
     Fixed   n;
 
-    n.setRawBits((static_cast<int64_t>(this->_val) << this->_bits) / (fix._val));
+    if (fix._val == 0)
+        throw std::runtime_error("Division by zero");
+    else
+        n.setRawBits((static_cast<int64_t>(this->_val) << this->_bits) / (fix._val));
     return n;
 }
 
@@ -178,7 +182,7 @@ Fixed& Fixed::max(Fixed& first, Fixed&second)
 
 const Fixed& Fixed::max(const Fixed& first, const Fixed&second)
 {
-    if (first._val <= second._val)
+    if (first._val >= second._val)
         return first;
     return second;
 }

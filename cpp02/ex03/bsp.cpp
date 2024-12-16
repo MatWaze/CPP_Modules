@@ -41,9 +41,7 @@ bool    crossProduct(Point const a, Point const b, Point const c, Point const p)
     float   bcBP = getCP(bc, bp);
     float   caCP = getCP(ca, cp);
 
-    bool    ans;
-
-    ans = (abAP > 0 && bcBP > 0 && caCP > 0) || (abAP < 0 && bcBP < 0 && caCP < 0);
+    bool ans = (abAP > 0 && bcBP > 0 && caCP > 0) || (abAP < 0 && bcBP < 0 && caCP < 0);
     return ans;
 }
 
