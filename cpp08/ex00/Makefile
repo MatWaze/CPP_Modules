@@ -1,10 +1,10 @@
-name = array
+name = easyfind
 c++ = c++
-flags = -Wall -Wextra -Werror -std=c++98# -fsanitize=address
+flags = -Wall -Wextra -Werror -std=c++98
 
-all : $(name)
+all: $(name)
 
-$(name) : main.o Makefile
+$(name): main.o Makefile
 	$(c++) $(flags) main.cpp -o $(name)
 
 %.o : %.cpp

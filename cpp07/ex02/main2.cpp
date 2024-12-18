@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Array.tpp>
+#include "Array.tpp"
 #include <cstdlib>
 
 #define MAX_VAL 10

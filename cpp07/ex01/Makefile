@@ -10,6 +10,9 @@ $(name) : main.o Makefile
 clean:
 	rm -rf main.o
 
+%.o : %.cpp
+	$(c++) $(flags) -c $< -o $@
+
 fclean: clean
 	rm -rf $(name)
 
