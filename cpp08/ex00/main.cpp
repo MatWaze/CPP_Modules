@@ -1,7 +1,7 @@
 #include <deque>
 #include <exception>
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "../doctest.h"
+#include "../../doctest.h"
 #include "easyfind.hpp"
 #include <list>
 #include <vector>
@@ -9,9 +9,8 @@
 TEST_CASE("easyfind with vector")
 {
     std::vector<int> v;
-
     CHECK_THROWS_AS(::easyfind(v,-4), std::exception);
-
+    
     v.push_back(1);
     v.push_back(34);
     v.push_back(5);
