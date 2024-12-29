@@ -16,10 +16,21 @@ class   Span
         Span  &operator=(const Span &sp);
 
         void    addNumber(int num);
+        
+        template<typename Iter>
+        void    addRange(Iter begin, Iter end);
+        
         int shortestSpan();
         int longestSpan();
 
         int getSize() const;
 };
+
+template<typename Iter>
+void    Span::addRange(Iter begin, Iter end)
+{
+    for (Iter it = begin; it != end; it++)
+        this->addNumber(*it);
+}
 
 #endif

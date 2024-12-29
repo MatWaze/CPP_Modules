@@ -1,6 +1,6 @@
 name = easyfind
 c++ = c++
-flags = -Wall -Wextra -Werror -std=c++98
+flags = -Wall -Wextra -Werror #-std=c++98
 
 all: $(name)
 

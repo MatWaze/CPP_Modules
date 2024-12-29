@@ -1,8 +1,8 @@
 name = span
 c++ = c++
-flags = -Wall -Wextra -Werror
+flags = -Wall -Wextra -Werror #-std=c++98
 src = main.cpp Span.cpp
-obj = $(src:.o=.cpp)
+obj = $(src:.cpp=.o)
 
 all: $(name)
 
@@ -10,7 +10,7 @@ $(name) : $(obj) Makefile
 	$(c++) $(flags) $(obj) -o $(name)
 
 %.o : %.cpp
-	$(c++) $(flags) -c <$ -o $@
+	$(c++) $(flags) -c $< -o $@
 
 clean:
 	rm -rf $(obj)

@@ -1,8 +1,23 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "../../doctest.h"
 #include "Span.hpp"
-#include <stdexcept>
+#include <vector>
 
+// int main(int, char **)
+// {
+//     Span    s(5);
+//     std::vector<int> v;
+
+//     v.push_back(1); 
+//     v.push_back(2); 
+//     v.push_back(3); 
+//     v.push_back(4);
+//     v.push_back(4);
+
+//     s.addRange(v.begin(), v.end());
+
+//     return 0;
+// }
 TEST_CASE("Span test")
 {
     Span    sp(4);

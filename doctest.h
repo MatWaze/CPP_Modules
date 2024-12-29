@@ -4403,7 +4403,7 @@ namespace detail
         static bool             isSet;
         static struct sigaction oldSigActions[DOCTEST_COUNTOF(signalDefs)];
         static stack_t          oldSigStack;
-        static char             altStackMem[4 * SIGSTKSZ];
+        static char             altStackMem[4 * 1000];
 
         static void handleSignal(int sig) {
             std::string name = "<unknown signal>";

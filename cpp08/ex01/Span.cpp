@@ -77,7 +77,7 @@ void    Span::addNumber(int num)
         this->_counter++;
     }
     else
-        throw std::out_of_range("The span is full");
+        throw std::out_of_range("Attempting to add to full span");
 }
 
 int Span::shortestSpan()
