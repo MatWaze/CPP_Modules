@@ -10,6 +10,8 @@ Date::Date()
     this->day = -1;
 }
 
+Date::~Date() {}
+
 Date::Date(unsigned int year, unsigned int month, unsigned int day)
 {
     this->year = year;
@@ -75,10 +77,7 @@ BitcoinExchange::BitcoinExchange(float value, float rate, Date date)
     this->_date = date;
 }
 
-BitcoinExchange::~BitcoinExchange()
-{
-
-}
+BitcoinExchange::~BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &btc)
 {
@@ -120,8 +119,50 @@ float   BitcoinExchange::compute() const
 
 std::ostream    &operator<<(std::ostream &os, const BitcoinExchange &btc)
 {
-    os << btc.getValue() << " of Bitcoin was worth " << btc.compute() << " on " 
+    os << btc.getValue() << "₿ was worth $" << btc.compute() << " on " 
     << btc.getDate().year << "-" << btc.getDate().month << "-" << btc.getDate().day;
 
     return os;
 }
+
+// InvalidValueException
+
+BitcoinExchange::InvalidValueException::InvalidValueException(const std::string val) throw()
+{
+    this->_msg = "[ " + val + " ] - " + "Value must be an integer between 1 and 1000";
+}
+
+const char *BitcoinExchange::InvalidValueException::what() const throw()
+{
+    return this->_msg.c_str();
+}
+
+BitcoinExchange::InvalidValueException::~InvalidValueException() throw() {}
+
+// InvalidDateException
+
+BitcoinExchange::InvalidDateException::InvalidDateException(const std::string date) throw()
+{
+    this->_msg = "[ " + date + " ] - " + "Date must be of format yy-mm-dd,\nwhere yy is a positive integer, mm is between 1 and 12, and dd is between 1 and 31";
+}
+
+const char *BitcoinExchange::InvalidDateException::what() const throw()
+{
+    return this->_msg.c_str();
+}
+
+BitcoinExchange::InvalidDateException::~InvalidDateException() throw() {}
+
+// InvalidInputException
+
+BitcoinExchange::InvalidInputException::InvalidInputException(const std::string msg) throw()
+{
+    this->_msg = "[ " + msg + " ] - " + " input string must be of format date | value";
+}
+
+const char *BitcoinExchange::InvalidInputException::what() const throw()
+{
+    return this->_msg.c_str();
+}
+
+BitcoinExchange::InvalidInputException::~InvalidInputException() throw() {}

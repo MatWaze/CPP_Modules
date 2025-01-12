@@ -2,6 +2,7 @@
 # define BITCOIN_EXCHANGE
 
 #include <ostream>
+
 struct Date
 {
     unsigned int year; 
@@ -11,6 +12,8 @@ struct Date
     Date();
     Date(const Date &date);
     Date(unsigned int year, unsigned int month, unsigned int day);
+
+    ~Date();
 
     Date    &operator=(const Date &date);
     bool    operator>=(const Date &date);
@@ -28,6 +31,37 @@ class BitcoinExchange
         Date    _date;
 
     public:
+        struct InvalidInputException : public std::exception
+        {
+            private:
+                std::string _msg;
+            public:
+                ~InvalidInputException() throw();
+                InvalidInputException(const std::string msg) throw();
+                const char * what() const throw();
+
+        };
+
+        struct InvalidValueException : public std::exception
+        {
+            private:
+                std::string _msg;
+            public:
+                ~InvalidValueException() throw();
+                InvalidValueException(const std::string msg) throw();
+                const char * what() const throw();
+        };
+
+        struct InvalidDateException : public std::exception
+        {
+            private:
+                std::string _msg;
+            public:
+                ~InvalidDateException() throw();
+                InvalidDateException(const std::string msg) throw();
+                const char * what() const throw();
+        };
+
         BitcoinExchange();
         BitcoinExchange(float value, float rate, Date date);
         BitcoinExchange(const BitcoinExchange &btc);

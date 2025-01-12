@@ -1,3 +1,4 @@
+#include <cctype>
 #include <climits>
 #include <iostream>
 #include <fstream>
@@ -8,9 +9,9 @@
 #include <cstdlib>
 
 std::string trim(const std::string &str);
-bool    validDate(std::list<std::string> ymd);
+bool    validDate(const std::string &year, const std::string &month, const std::string &day);
 Date    createDate(const std::string &dateStr);
-float rate(const Date &date);
+float rate(Date &date);
 BitcoinExchange createBitcoin(const std::string &line);
 
 std::string trim(const std::string &str)
@@ -45,7 +46,7 @@ std::list<std::string> getSplitted(const std::string &line, char delim)
 
 // if year and month equal: 12 > 10 also 12 > 7, but 12-10=2 > 12-7=5 so choose 10th
 
-float rate(const Date &date)
+float rate(Date &date)
 {
     std::ifstream   file("data.csv");
 
@@ -69,8 +70,8 @@ float rate(const Date &date)
 
         Date rateDate = createDate(dt);
 
-        int diff = abs(rateDate - date);
-        if (diff < i && rateDate <= date)
+        int diff = date - rateDate;
+        if (diff < i && diff >= 0)
         {
             i = diff;
             ans = atof(vl.c_str());
@@ -79,26 +80,21 @@ float rate(const Date &date)
     return ans;
 }
 
-bool    isNumeric(const std::string &str)
+bool    isInt(const std::string &str)
 {
     unsigned int i = 0;
 
-    for (; i < str.length(); i++) ;
+    for (; i < str.length() && std::isdigit(str[i]); i++) ;
 
-    return str.length() == i;
+    return str.length() < 11 && str.length() == i;
 }
 
-bool    validDate(std::list<std::string> ymd)
+bool    validDate(const std::string &year, const std::string &month, const std::string &day)
 {
-    std::list<std::string>::iterator it = ymd.begin();
-    std::string year = *it++;
-    std::string month = *it++;
-    std::string day = *it;
-
-    bool numeric = isNumeric(year) && isNumeric(month) && isNumeric(day);
-    bool validYear = atoi(year.c_str()) >= 0;
-    bool validMonth = atoi(month.c_str()) > 0 && atoi(month.c_str()) < 13;
-    bool validDay = atoi(day.c_str()) > 0 && atoi(day.c_str()) < 32;
+    bool numeric = isInt(year) && isInt(month) && isInt(day);
+    bool validYear = atol(year.c_str()) >= 0;
+    bool validMonth = month.length() == 2 && atol(month.c_str()) > 0 && atol(month.c_str()) < 13;
+    bool validDay = day.length() == 2 && atol(day.c_str()) > 0 && atol(day.c_str()) < 32;
 
     return numeric && validYear && validMonth && validDay;
 }
@@ -107,44 +103,44 @@ Date   createDate(const std::string &dateStr)
 {
     std::list<std::string> ymd = getSplitted(dateStr, '-');
 
-    std::list<std::string>::iterator it = ymd.begin();
-    std::string year = *it++;
-    std::string month = *it++;
-    std::string day = *it;
+    if (ymd.size() == 3)
+    {
+        std::list<std::string>::iterator it = ymd.begin();
+        std::string year = *it++;
+        std::string month = *it++;
+        std::string day = *it;
 
-    if (validDate(ymd))
-        return Date(atoi(year.c_str()), atoi(month.c_str()), atoi(day.c_str()));
-    return Date();
+        if (validDate(year, month, day))
+            return Date(atol(year.c_str()), atol(month.c_str()), atol(day.c_str()));
+    }
+
+    throw BitcoinExchange::InvalidDateException(dateStr);
 } 
 
 BitcoinExchange    createBitcoin(const std::string &line)
 {
-    std::istringstream  is;
-    std::string splitted[2];
+    std::list<std::string> splitted = getSplitted(line, '|');
 
-    is.str(line);
+    if (splitted.size() != 2)
+        throw BitcoinExchange::InvalidInputException(line);
 
-    int i = 0;
-    for (std::string token; std::getline(is, token, '|') ;)
-        splitted[i++] = token;
+    std::list<std::string>::iterator it = splitted.begin();
 
-    splitted[0] = trim(splitted[0]);
-    splitted[1] = trim(splitted[1]);
+    std::string d = *it++;
+    std::string v = *it;
 
-    float val = atof(splitted[1].c_str());
+    d = trim(d);
+    v = trim(v);
+
+    Date date = createDate(d);
+    
+    float val = atof(v.c_str());
 
     if (val < 0 || val > 1000)
-        return BitcoinExchange(val, 0, Date());
+        throw BitcoinExchange::InvalidValueException(line);
 
-    Date date = createDate(splitted[0]);
-
-    BitcoinExchange btc = BitcoinExchange();
-    if (date != Date())
-    {
-        float rt = rate(date);
-
-        btc = BitcoinExchange(val, rt, date);
-    }
+    float rt = rate(date);
+    BitcoinExchange btc = BitcoinExchange(val, rt, date);
     return btc;
 }
 
@@ -154,8 +150,6 @@ int main(int argc, char **argv)
     {
         try
         {
-            std::list<BitcoinExchange>  btcList;
-            
             std::ifstream   file(argv[1]);
 
             std::string line;
@@ -168,14 +162,15 @@ int main(int argc, char **argv)
                     continue;
                 }
 
-                BitcoinExchange b = createBitcoin(line);
-                if (b.getValue() < 0 || b.getValue() > 1000)
-                    std::cout << "Error: invalid value\n";
-                else if (b.getDate() == Date())
-                    std::cout << "Error: invalid date\n";
-                else
+                try
+                {
+                    BitcoinExchange b = createBitcoin(line);
                     std::cout << b << std::endl;
-                btcList.push_back(b);
+                }
+                catch (std::exception &ex)
+                {
+                    std::cout << ex.what() << std::endl;
+                }
             }
 
             file.close();
