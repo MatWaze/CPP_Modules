@@ -1,6 +1,6 @@
 name = bureaucrat
 c++ = c++
-flags = -Wall -Wextra -Werror -std=c++98
+flags = -Wall -Wextra -Werror -std=c++98 -g3
 src = main.cpp Bureaucrat.cpp
 obj = $(src:.cpp=.o)
 
