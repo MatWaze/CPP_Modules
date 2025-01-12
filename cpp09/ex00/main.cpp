@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cctype>
 #include <climits>
 #include <iostream>
@@ -8,10 +9,11 @@
 #include "BitcoinExchange.hpp"
 #include <cstdlib>
 
-std::string trim(const std::string &str);
-bool    validDate(const std::string &year, const std::string &month, const std::string &day);
-Date    createDate(const std::string &dateStr);
-float rate(Date &date);
+void            checkForSpace(const std::string &str);
+std::string     trim(const std::string &str);
+bool            validDate(const std::string &year, const std::string &month, const std::string &day);
+Date            createDate(const std::string &dateStr);
+float           rate(Date &date);
 BitcoinExchange createBitcoin(const std::string &line);
 
 std::string trim(const std::string &str)
@@ -39,7 +41,15 @@ std::list<std::string> getSplitted(const std::string &line, char delim)
     is.str(line);
 
     for (std::string token; std::getline(is, token, delim) ;)
-        splitted.push_back(token);
+    {
+        // '2012-02-02    |     34' OK
+        // '2012  -  02  -  03 | 34' KO
+        if (delim == '|')
+            token = trim(token);
+
+        if (token.length() > 0)
+            splitted.push_back(token);
+    }
 
     return splitted;
 }
@@ -80,18 +90,47 @@ float rate(Date &date)
     return ans;
 }
 
-bool    isInt(const std::string &str)
+bool    isDouble(std::string &str)
+{
+    int pointC = 0;
+    int digitC = 0;
+    int i = 0;
+
+    if (str[i] == '-' || str[i] == '+')
+        i++;
+
+    int len = str.length() - i;
+
+    for (; i < len + 1; i++)
+    {
+        if (str[i] == '.')
+            pointC++;
+        else if (std::isdigit(str[i]))
+            digitC++;
+    }
+
+    bool    isDouble = pointC == 1 && digitC == len - 1;
+
+    return isDouble;
+}
+
+bool    isNumber(const std::string &str)
 {
     unsigned int i = 0;
 
+    if (str.length() == 1 && (str[i] == '-' || str[i] == '+'))
+        return false;
+    else if (str[i] == '+' || str[i] == '-')
+        i++;
+
     for (; i < str.length() && std::isdigit(str[i]); i++) ;
 
-    return str.length() < 11 && str.length() == i;
+    return str.length() != 0 && str.length() < 11 && str.length() == i;
 }
 
 bool    validDate(const std::string &year, const std::string &month, const std::string &day)
 {
-    bool numeric = isInt(year) && isInt(month) && isInt(day);
+    bool numeric = isNumber(year) && isNumber(month) && isNumber(day);
     bool validYear = atol(year.c_str()) >= 0;
     bool validMonth = month.length() == 2 && atol(month.c_str()) > 0 && atol(month.c_str()) < 13;
     bool validDay = day.length() == 2 && atol(day.c_str()) > 0 && atol(day.c_str()) < 32;
@@ -103,7 +142,7 @@ Date   createDate(const std::string &dateStr)
 {
     std::list<std::string> ymd = getSplitted(dateStr, '-');
 
-    if (ymd.size() == 3)
+    if (ymd.size() == 3 && std::count(dateStr.begin(), dateStr.end(), '-') == 2)
     {
         std::list<std::string>::iterator it = ymd.begin();
         std::string year = *it++;
@@ -115,10 +154,29 @@ Date   createDate(const std::string &dateStr)
     }
 
     throw BitcoinExchange::InvalidDateException(dateStr);
-} 
+}
+
+void    checkForSpace(const std::string &str)
+{
+    size_t pos = str.find('|');
+
+    if (pos != std::string::npos)
+    {
+        size_t before = pos - 1;
+        size_t after = pos + 1;
+
+        if ((before < str.length() && str[before] != ' ') || (after < str.length() && str[after] != ' '))
+            throw BitcoinExchange::InvalidInputException(str);
+    }
+    else
+        throw BitcoinExchange::InvalidInputException(str);
+
+}
 
 BitcoinExchange    createBitcoin(const std::string &line)
 {
+    checkForSpace(line);
+
     std::list<std::string> splitted = getSplitted(line, '|');
 
     if (splitted.size() != 2)
@@ -134,6 +192,9 @@ BitcoinExchange    createBitcoin(const std::string &line)
 
     Date date = createDate(d);
     
+    if (!(isDouble(v) || isNumber(v)))
+        throw BitcoinExchange::InvalidValueException(line);
+
     float val = atof(v.c_str());
 
     if (val < 0 || val > 1000)
@@ -144,7 +205,7 @@ BitcoinExchange    createBitcoin(const std::string &line)
     return btc;
 }
 
-int main(int argc, char **argv)
+int main2(int argc, char **argv)
 {
     if (argc == 2)
     {
@@ -181,7 +242,7 @@ int main(int argc, char **argv)
         }
     }
     else
-        std::cout << "Usage: ./btc file_name\nfile_name - name of a file containing date and value rows to evaluate" << std::endl;
+        std::cout << "Usage: ./btc file_name\nfile_name - name of a file containing date and value rows" << std::endl;
 
     return 0;
 }

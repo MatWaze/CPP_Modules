@@ -1,7 +1,7 @@
 name = btc
 cp = c++
 flags = -Wall -Wextra -Werror -std=c++98 
-src = main.cpp BitcoinExchange.cpp
+src = main.cpp BitcoinExchange.cpp test.cpp
 obj = $(src:.cpp=.o)
 
 all : $(name)

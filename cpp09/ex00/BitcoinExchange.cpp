@@ -129,7 +129,7 @@ std::ostream    &operator<<(std::ostream &os, const BitcoinExchange &btc)
 
 BitcoinExchange::InvalidValueException::InvalidValueException(const std::string val) throw()
 {
-    this->_msg = "[ " + val + " ] - " + "Value must be an integer between 1 and 1000";
+    this->_msg = "[ " + val + " ] - " + "Value must be a number between 1 and 1000";
 }
 
 const char *BitcoinExchange::InvalidValueException::what() const throw()
@@ -157,7 +157,7 @@ BitcoinExchange::InvalidDateException::~InvalidDateException() throw() {}
 
 BitcoinExchange::InvalidInputException::InvalidInputException(const std::string msg) throw()
 {
-    this->_msg = "[ " + msg + " ] - " + " input string must be of format date | value";
+    this->_msg = "[ " + msg + " ] - " + "Input string must be of format date | value";
 }
 
 const char *BitcoinExchange::InvalidInputException::what() const throw()
