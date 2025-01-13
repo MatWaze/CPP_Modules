@@ -9,12 +9,15 @@
 #include "BitcoinExchange.hpp"
 #include <cstdlib>
 
-void            checkForSpace(const std::string &str);
-std::string     trim(const std::string &str);
-bool            validDate(const std::string &year, const std::string &month, const std::string &day);
-Date            createDate(const std::string &dateStr);
-float           rate(Date &date);
-BitcoinExchange createBitcoin(const std::string &line);
+void                    checkForSpace(const std::string &str);
+std::string             trim(const std::string &str);
+bool                    validDate(const std::string &year, const std::string &month, const std::string &day);
+std::list<std::string>  getSplitted(const std::string &line, char delim);
+Date                    createDate(const std::string &dateStr);
+float                   rate(Date &date);
+BitcoinExchange         createBitcoin(const std::string &line);
+bool                    isDouble(std::string &str);
+bool                    isNumber(const std::string &str);
 
 std::string trim(const std::string &str)
 {

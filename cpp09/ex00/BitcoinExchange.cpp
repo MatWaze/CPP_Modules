@@ -1,5 +1,6 @@
 #include "BitcoinExchange.hpp"
 #include <ostream>
+#include <sstream>
 
 // Date
 
@@ -119,8 +120,21 @@ float   BitcoinExchange::compute() const
 
 std::ostream    &operator<<(std::ostream &os, const BitcoinExchange &btc)
 {
+    std::stringstream month;
+    std::stringstream day;
+    
+    if (btc.getDate().month < 10)
+        month << '0' << btc.getDate().month;
+    else
+        month << btc.getDate().month;
+
+    if (btc.getDate().day < 10)
+        day << '0' << btc.getDate().day;
+    else
+        day << btc.getDate().day;
+
     os << btc.getValue() << "₿ was worth $" << btc.compute() << " on " 
-    << btc.getDate().year << "-" << btc.getDate().month << "-" << btc.getDate().day;
+    << btc.getDate().year << "-" << month.str() << "-" << day.str();
 
     return os;
 }

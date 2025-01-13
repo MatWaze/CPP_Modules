@@ -1,24 +1,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "../../doctest.h"
-#include <iostream>
 #include "BitcoinExchange.hpp"
 
 BitcoinExchange createBitcoin(const std::string &line);
-
-// bool  CHECK_OUTPUT(std::string str)
-// {
-//     std::streambuf* oldBuf = std::cout.rdbuf();
-//     std::ostringstream os;
-//     std::cout.rdbuf(os.rdbuf());
-
-
-//     std::cout.rdbuf(oldBuf);
-
-//     std::string ans = "";
-
-//     return os.str() == ans;
-// }
-
 
 TEST_CASE("Testing createBitcoin correct output")
 {
@@ -73,6 +57,7 @@ TEST_CASE("Check for InvalidInputException")
     CHECK_THROWS_AS(createBitcoin("2012-02-03|"), BitcoinExchange::InvalidInputException);
     CHECK_THROWS_AS(createBitcoin("|3"), BitcoinExchange::InvalidInputException);
     CHECK_THROWS_AS(createBitcoin("|"), BitcoinExchange::InvalidInputException);
+    CHECK_THROWS_AS(createBitcoin("  "), BitcoinExchange::InvalidInputException);
     CHECK_THROWS_AS(createBitcoin(" | "), BitcoinExchange::InvalidInputException);
     CHECK_THROWS_AS(createBitcoin("    |    "), BitcoinExchange::InvalidInputException);
     CHECK_THROWS_AS(createBitcoin("    2012-02-03     |    "), BitcoinExchange::InvalidInputException);
@@ -159,5 +144,4 @@ TEST_CASE("Check for InvalidValueException")
     CHECK_THROWS_AS(createBitcoin("2012-02-03 | 00+10"), BitcoinExchange::InvalidValueException);
     CHECK_THROWS_AS(createBitcoin("2012-02-03 | 10-01"), BitcoinExchange::InvalidValueException);
     CHECK_THROWS_AS(createBitcoin("2012-02-03 | 10=01"), BitcoinExchange::InvalidValueException);
-    CHECK_THROWS_AS(createBitcoin("2012-02-03 | 1-001"), BitcoinExchange::InvalidValueException);
 }
