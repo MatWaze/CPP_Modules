@@ -27,7 +27,7 @@ class RPN
         int operator*(const RPN &rpn);
 
         static bool isValidExpression(const char *str);
-        static void calculate(const char *str);
+        static int calculate(const char *str);
 };
 
 #endif

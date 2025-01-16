@@ -107,7 +107,7 @@ bool    RPN::isValidExpression(const char *str)
     return true;
 }
 
-void    RPN::calculate(const char *str)
+int    RPN::calculate(const char *str)
 {
     std::istringstream  is;
     is.str(str);
@@ -149,5 +149,5 @@ void    RPN::calculate(const char *str)
         }
     }
 
-    std::cout << st.top() << std::endl;
+    return st.top();
 }
