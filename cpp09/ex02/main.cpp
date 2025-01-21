@@ -6,7 +6,6 @@
 #include <sstream>
 #include <vector>
 #include <time.h>
-#include "cpp-sort/include/cpp-sort/sorters/merge_insertion_sorter.h"
 #include <iostream>
 #include <vector>
 #include <climits>
@@ -225,6 +224,9 @@ std::vector<int> mergeInsertion(std::vector<int> nums)
         ans.push_back(pairs.front().first);
         ans.push_back(pairs.front().second);
 
+        if (notPaired != INT_MIN)
+            binaryInsertion(ans, notPaired);
+
         return ans;
     }
 
@@ -292,9 +294,9 @@ int main(int argc, char **argv)
     for (int i = 1; i < argc; i++)
         nums.push_back(std::atoi(argv[i]));
 
-    for (auto c : nums)
-        std::cout << c << " ";
-    std::cout << "\n";
+    // for (auto c : nums)
+    //     std::cout << c << " ";
+    // std::cout << "\n";
     std::cout << "nums size: " << nums.size() << std::endl;
     // clock_t	start = clock();
 
@@ -302,6 +304,7 @@ int main(int argc, char **argv)
     auto start = std::chrono::high_resolution_clock::now();
 
     // Sorting code
+    auto ans = mergeInsertion(nums);
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();

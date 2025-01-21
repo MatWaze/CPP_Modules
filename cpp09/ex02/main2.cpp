@@ -134,6 +134,9 @@ std::vector<int> mergeInsertion(std::vector<int> nums)
         ans.push_back(pairs.front().first);
         ans.push_back(pairs.front().second);
 
+        if (notPaired != INT_MIN)
+            binaryInsertion(ans, notPaired);
+
         return ans;
     }
 
@@ -166,9 +169,9 @@ int main(int argc, char **argv)
     printf ("It took %f ms.\n", time);
     bool b = std::is_sorted(ans.begin(), ans.end());
 
-    for (size_t i = 0; i < ans.size(); i++)
-        std::cout << ans[i] << " ";
-    std::cout << "\n";
+    // for (size_t i = 0; i < ans.size(); i++)
+    //     std::cout << ans[i] << " ";
+    // std::cout << "\n";
 
     if (!b)
         std::cout << "Not sorted" << std::endl;
