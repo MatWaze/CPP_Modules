@@ -219,10 +219,7 @@ std::vector<int>    PmergeMe::mergeInsertion(std::vector<std::pair<int, int>> pa
 
     int newNotPaired = INT_MIN;
     if (greatestElements.size() % 2 == 1)
-    {
         newNotPaired = greatestElements[greatestElements.size() - 1];
-        greatestElements.pop_back(); // Remove the unpaired element
-    }
 
     std::vector<int> mainChain = mergeInsertion(pairSort(greatestElements), newNotPaired);
 
