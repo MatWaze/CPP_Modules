@@ -5,6 +5,7 @@
 #include <fstream>
 #include <list>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include "BitcoinExchange.hpp"
 #include <cstdlib>
@@ -63,6 +64,8 @@ float rate(Date &date)
 {
     std::ifstream   file("data.csv");
 
+    if (!file.is_open())
+        throw std::runtime_error("Error opening data file");
     int i = INT_MIN;
     float ans = 0;
 
@@ -216,6 +219,8 @@ int main(int argc, char **argv)
         {
             std::ifstream   file(argv[1]);
 
+            if (!file.is_open())
+                throw std::runtime_error("Error opening input file");
             std::string line;
             int i = 0;
             while (std::getline(file, line))
