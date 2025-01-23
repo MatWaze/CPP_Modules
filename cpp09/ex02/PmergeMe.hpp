@@ -20,7 +20,7 @@ class PmergeMe
         static std::vector<std::pair<int, int>> pairSort(const std::vector<int> &nums);
         std::vector<int> getGreatest(const std::vector<std::pair<int, int>> &pairs);
         static std::vector<int> getSmallest(const std::vector<int> &second, const std::vector<std::pair<int, int>> &pairs);
-        std::vector<int> mergeInsertion(std::vector<std::pair<int, int>> pairs, int notPaired);
+        std::vector<int> mergeInsertion(std::vector<std::pair<int, int>> &pairs, int notPaired);
 
         std::vector<std::pair<int, int>>    sortPairs(std::vector<std::pair<int, int>> &pairs);
         static int getJacobsthalNumber(int num);

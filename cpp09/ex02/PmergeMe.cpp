@@ -1,9 +1,9 @@
 #include "PmergeMe.hpp"
-#include <algorithm>
 #include <climits>
 #include <cmath>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 PmergeMe::PmergeMe() {}
 
@@ -196,7 +196,7 @@ std::vector<std::pair<int, int>> PmergeMe::sortPairs(std::vector<std::pair<int, 
     return sortedPairs;
 }
 
-std::vector<int>    PmergeMe::mergeInsertion(std::vector<std::pair<int, int>> pairs, int notPaired)
+std::vector<int>    PmergeMe::mergeInsertion(std::vector<std::pair<int, int>> &pairs, int notPaired)
 {
     if (pairs.size() <= 1)
     {
@@ -221,7 +221,8 @@ std::vector<int>    PmergeMe::mergeInsertion(std::vector<std::pair<int, int>> pa
     if (greatestElements.size() % 2 == 1)
         newNotPaired = greatestElements[greatestElements.size() - 1];
 
-    std::vector<int> mainChain = mergeInsertion(pairSort(greatestElements), newNotPaired);
+    std::vector<std::pair<int, int>> newPairs = pairSort(greatestElements);
+    std::vector<int> mainChain = mergeInsertion(newPairs, newNotPaired);
 
     insertIntoMainChain(pairs, mainChain);
 
