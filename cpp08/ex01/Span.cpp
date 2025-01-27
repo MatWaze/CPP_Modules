@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <algorithm>
+#include <climits>
 #include <iostream>
 #include <stdexcept>
 
@@ -36,9 +37,9 @@ Span::Span(const Span &sp)
 
     this->_size = spSize;
     this->_list = new int[spSize];
-    this->_counter = sp._counter;
+    this->_counter = sp.getCounter();
 
-    for (int i = 0; i < spSize; i++)
+    for (int i = 0; i < sp.getCounter(); i++)
         this->_list[i] = sp._list[i];
 }
 
@@ -53,7 +54,7 @@ Span    &Span::operator=(const Span &sp)
         int *temp = new int[spSize];
         int i = 0;
 
-        for (; i < spSize; i++)
+        for (; i < this->getCounter(); i++)
             temp[i] = sp._list[i];
 
         delete [] this->_list;
@@ -67,6 +68,11 @@ Span    &Span::operator=(const Span &sp)
 int Span::getSize() const
 {
     return this->_size;
+}
+
+int Span::getCounter() const
+{
+    return this->_counter;
 }
 
 void    Span::addNumber(int num)
@@ -84,12 +90,20 @@ int Span::shortestSpan()
 {
     if (this->_counter > 1)
     {
-        std::sort(this->_list, this->_list + this->_counter);
+        // temp Span so that I don't end up sorting the original one
+        Span    sorted = *this;
 
-        int mx = this->_list[this->_counter - 1];
-        int lessMx = this->_list[this->_counter - 2];
+        std::sort(sorted._list, sorted._list + sorted.getCounter());
 
-        return mx - lessMx;
+        int diff = INT_MAX;
+
+        for (int i = 1; i < sorted.getCounter(); i++)
+        {
+            int newDiff = std::abs(sorted._list[i - 1] - sorted._list[i]);
+            diff = std::min(diff, newDiff);
+        }
+
+        return diff;
     }
     else
         throw std::out_of_range("The span has less than 2 elements");

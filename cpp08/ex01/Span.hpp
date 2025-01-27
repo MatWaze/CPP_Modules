@@ -24,6 +24,7 @@ class   Span
         int longestSpan();
 
         int getSize() const;
+        int getCounter() const;
 };
 
 template<typename Iter>

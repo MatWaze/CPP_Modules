@@ -183,7 +183,7 @@ TEST_CASE("Testing MutantStack")
     CHECK_EQ(*--mstack.end(), 1);
 }
 
-TEST_CASE("String stack")
+TEST_CASE("String MutantStack")
 {
     MutantStack<std::string>    st;
 
