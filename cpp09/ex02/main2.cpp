@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 {
     try
     {
-        sortWith<std::vector<int>>(VECTOR, argc, argv);
+        sortWith<std::vector<int> >(VECTOR, argc, argv);
     }
     catch (std::exception &ex)
     {

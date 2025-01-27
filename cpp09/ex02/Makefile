@@ -1,6 +1,6 @@
 cp = c++
 name = PmergeMe
-flags = -Wall -Wextra -Werror #-fsanitize=address
+flags = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
 src = main2.cpp
 obj = $(src:.cpp=.o)
 
