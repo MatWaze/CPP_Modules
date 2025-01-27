@@ -1,5 +1,5 @@
 name = mutant
-flags = -std=c++98 -fsanitize=address -Wall -Wextra -Werror
+flags = -Wall -Wextra -Werror -std=c++98
 
 all: $(name)
 

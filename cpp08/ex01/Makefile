@@ -1,6 +1,6 @@
 name = span
 c++ = c++
-flags = -Wall -Wextra -Werror #-std=c++98
+flags = -Wall -Wextra -Werror -std=c++98
 src = main.cpp Span.cpp
 obj = $(src:.cpp=.o)
 

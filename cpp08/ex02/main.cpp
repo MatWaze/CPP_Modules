@@ -1,6 +1,6 @@
+#include "MutantStack.hpp"
 #include "MutantStack.tpp"
 #include <algorithm>
-#include <list>
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "../../doctest.h"
 #include <list>
@@ -93,13 +93,13 @@ TEST_CASE("Testing iterator class")
 
     MutantStack<int>::iterator  last = --en;
 
+    // postfix - return value unchanged
     MutantStack<int>::iterator  last2 = en++;
 
-    // begin and before the end iterators
+    // first and before the end iterators
     CHECK_EQ(*beg, 1);
     CHECK_EQ(*last, 3);
 
-    // comparisons
     CHECK(last == last2);
     CHECK(beg < last);
     CHECK(last > beg);
@@ -181,4 +181,46 @@ TEST_CASE("Testing MutantStack")
 
     CHECK_EQ(*mstack.begin(), 5);
     CHECK_EQ(*--mstack.end(), 1);
+}
+
+TEST_CASE("String stack")
+{
+    MutantStack<std::string>    st;
+
+    st.push("abc");
+    st.push("def");
+    st.push("gh");
+    st.push("ij");
+    st.push("klmn");
+
+    std::streambuf* oldBuf = std::cout.rdbuf();
+    std::ostringstream oss;
+    std::cout.rdbuf(oss.rdbuf());
+
+    for (MutantStack<std::string>::iterator it = st.begin(); it != st.end(); it++)
+        std::cout << *it;
+
+    std::string out = oss.str();
+    std::cout.rdbuf(oldBuf);
+
+    CHECK_EQ(out, "abcdefghijklmn");
+
+    st.pop();
+
+    std::ostringstream oss2;
+    oldBuf = std::cout.rdbuf();
+    std::cout.rdbuf(oss2.rdbuf());
+
+    for (MutantStack<std::string>::iterator it = st.begin(); it != st.end(); it++)
+        std::cout << *it;
+
+    std::string out2 = oss2.str();
+    std::cout.rdbuf(oldBuf);
+
+    CHECK_EQ(out2, "abcdefghij");
+    
+    MutantStack<std::string>::iterator it = ++(st.begin());
+
+    CHECK_EQ(*it, "def");
+    CHECK_EQ(*--it, "abc");
 }

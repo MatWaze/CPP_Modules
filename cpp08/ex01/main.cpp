@@ -1,7 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "../../doctest.h"
 #include "Span.hpp"
-#include <vector>
 
 // int main(int, char **)
 // {
@@ -58,4 +57,26 @@ TEST_CASE("Span test")
 
     CHECK_THROWS_MESSAGE(s2.shortestSpan(),
         "The span has less than 2 elements");
+
+    Span    s3(5);
+    Span    s4(5);
+
+    std::vector<int> v;
+
+    v.push_back(1); 
+    v.push_back(2); 
+    v.push_back(3); 
+    v.push_back(4);
+    v.push_back(5);
+
+    s4.addNumber(1);
+    s4.addNumber(2);
+    s4.addNumber(3);
+    s4.addNumber(4);
+    s4.addNumber(5);
+
+    s3.addRange(v.begin(),  v.end());
+
+    CHECK_EQ(s3.shortestSpan(), s4.shortestSpan());
+    CHECK_EQ(s3.longestSpan(), s4.longestSpan());
 }
