@@ -55,6 +55,12 @@ TEST_CASE("Span test")
     CHECK_EQ(sp.longestSpan(), 100 - 10);
     CHECK_EQ(sp.shortestSpan(), 20 - 10);
 
+    CHECK_EQ(sp.longestSpan(), sp2.longestSpan());
+    CHECK_EQ(sp.shortestSpan(), sp2.shortestSpan());
+
+    CHECK_EQ(sp.longestSpan(), sp3.longestSpan());
+    CHECK_EQ(sp.shortestSpan(), sp3.shortestSpan());
+
     CHECK_THROWS_MESSAGE(sp.addNumber(343),
         "The span is full");
 

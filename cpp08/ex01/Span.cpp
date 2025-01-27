@@ -52,13 +52,12 @@ Span    &Span::operator=(const Span &sp)
         int spSize = sp.getSize();
 
         int *temp = new int[spSize];
-        int i = 0;
 
-        for (; i < this->getCounter(); i++)
+        for (int i = 0; i < sp.getCounter(); i++)
             temp[i] = sp._list[i];
 
         delete [] this->_list;
-        this->_counter = sp._counter;
+        this->_counter = sp.getCounter();
         this->_list = temp;
         this->_size = spSize;
     }
